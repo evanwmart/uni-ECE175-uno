@@ -6,37 +6,34 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "other.h"
+#include <assert.h>
 
 
-//linked list
-typedef struct card_s {
-            char color[7];
-            int value;
-            char action[15];
-            struct card_s *t;   //next node
-            struct card_s *h;   //prev node
-            int index;
-} card;
-
-void addCard(void);
 
 int main (void)
 {
-    //dynamically allocate deck
-    card *deck;
-    deck = (card*)malloc(10*sizeof(card));
+    card deck1[6];
+    //card deck2[5];
     
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 6; i++)
     {
-        deck[i].value = i;
-        printf("%d %d %d\n", deck[i].value, (int)sizeof(deck[i]), (int)sizeof(card) );
-        deck++;
+        deck1[i].value = i;
     }
-
+    printf("Before shuffle: ");
+    for (int i = 0; i < 6; i++)
+    {
+        printf("%d ", deck1[i].value);
+    }
     
-    printf("%d\n", (int)(sizeof(*deck)) );
+    shuffle(deck1, 6);
     
-    //add
+    printf("\nAfter shuffle: ");
+    for (int i = 0; i < 6; i++)
+    {
+        printf("%d ", deck1[i].value);
+    }
+    
     return 0;
 }
 
@@ -46,6 +43,7 @@ char name[20];
 int tears;
 struct node_s *listp; // pointer to same node
 } movie;
+ 
 movie * insertNewMovie(movie *list, movie *newp) {
 movie *temp;
 // Check if list is empty
