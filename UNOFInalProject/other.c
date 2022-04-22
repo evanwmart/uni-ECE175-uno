@@ -27,9 +27,7 @@ void shuffle(card deck[], int size)
 
 void starSeq(int *loadType, int*players, int*gameVar)
 {
-    loadType = 0;
-    players = 0;
-    gameVar = 0;
+
     printf("Let’s Play a Game of UNO\n");
     
     while(!(*players < 11 && 0 < *players))
