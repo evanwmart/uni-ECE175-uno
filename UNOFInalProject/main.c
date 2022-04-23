@@ -12,14 +12,13 @@
 
 int main (void)
 {
+    /*
     int loadType = 0, players = 0, gameVar = 0;
     int* loadPt = &loadType;
     int* playersPt = &players;
     int* gameVarPt = &gameVar;
-
     starSeq(loadPt, playersPt, gameVarPt);
-    
-    
+     */
     
     return 0;
 }
