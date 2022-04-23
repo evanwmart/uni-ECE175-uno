@@ -20,9 +20,5 @@ int main (void)
     starSeq(loadPt, playersPt, gameVarPt);
      */
     
-    FILE* inp=fopen("deck.txt", "w");
-    int d;
-    fprintf(inp, "%d", d);
-    
     return 0;
 }
