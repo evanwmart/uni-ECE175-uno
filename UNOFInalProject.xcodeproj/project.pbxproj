@@ -24,6 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4EFE8FA72814951D00A0CBCF /* file.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = file.txt; path = "../../Desktop/MidTerm 2 Practice/MidTerm 2 Practice/file.txt"; sourceTree = "<group>"; };
 		95366CE32812173400245060 /* UNOFInalProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UNOFInalProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		95366CE62812173400245060 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		95366D052813448D00245060 /* other.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = other.h; sourceTree = "<group>"; };
@@ -45,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				95366CE52812173400245060 /* UNOFInalProject */,
+				4EFE8FA72814951D00A0CBCF /* file.txt */,
 				95366CE42812173400245060 /* Products */,
 			);
 			sourceTree = "<group>";
