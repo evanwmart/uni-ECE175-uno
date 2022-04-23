@@ -11,6 +11,8 @@
 10 red
 11 red
 12 red
+13 red
+14 red
 0 yellow
 1 yellow
 2 yellow
@@ -24,6 +26,8 @@
 10 yellow
 11 yellow
 12 yellow
+13 yellow
+14 yellow
 0 green
 1 green
 2 green
@@ -37,6 +41,8 @@
 10 green
 11 green
 12 green
+13 green
+14 green
 0 blue
 1 blue
 2 blue
@@ -50,6 +56,8 @@
 10 blue
 11 blue
 12 blue
+13 blue
+14 blue
 1 red
 2 red
 3 red
@@ -98,11 +106,3 @@
 10 blue
 11 blue
 12 blue
-wild
-+4
-wild
-+4
-wild
-+4
-wild
-+4
