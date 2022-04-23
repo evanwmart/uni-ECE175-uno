@@ -77,14 +77,17 @@ void starSeq(int *loadType, int*players, int*gameVar)
     }
 }
 
-void readDeck(card deck[], FILE*inp)
+void readDeck(card deck[])
 {
+    FILE*inp;
+    inp = fopen("deck.txt", "r");
     char color[7];
     int value, cardNum = 0;
-    while (!feof(inp))
+    while (fscanf(inp, "%d %s", &value, color) != EOF)
     {
-        fscanf(inp, "%d ", &value);
-        fgets(color, 15, inp);
+        //fscanf(inp, "%d %s", &value, color);
+        //fgets(color, 15, inp);
+        //color[strlen(color) - 1] = '\0';
         card *pt;
         pt = &deck[cardNum];
         pt->value = value;

@@ -24,7 +24,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4EFE8FA82814973F00A0CBCF /* file.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = file.txt; path = "../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/file.txt"; sourceTree = "<group>"; };
 		95366CE32812173400245060 /* UNOFInalProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UNOFInalProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		95366CE62812173400245060 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		95366D052813448D00245060 /* other.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = other.h; sourceTree = "<group>"; };
@@ -45,7 +44,6 @@
 		95366CDA2812173400245060 = {
 			isa = PBXGroup;
 			children = (
-				4EFE8FA82814973F00A0CBCF /* file.txt */,
 				95366CE52812173400245060 /* UNOFInalProject */,
 				95366CE42812173400245060 /* Products */,
 			);

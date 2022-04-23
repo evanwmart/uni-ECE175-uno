@@ -21,8 +21,9 @@ typedef struct card_s {
 
 void shuffle(card deck[], int size);
 
-void readDeck(card deck[], FILE*inp);
+void readDeck(card deck[]);
 
 void starSeq(int *loadType, int*players, int*gameVar);
+
 
 #endif /* other_h */

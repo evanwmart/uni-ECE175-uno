@@ -19,6 +19,9 @@ int main (void)
     int* gameVarPt = &gameVar;
     starSeq(loadPt, playersPt, gameVarPt);
      */
+    card deck[108];
+    
+    readDeck(deck);
     
     return 0;
 }
