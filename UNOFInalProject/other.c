@@ -77,37 +77,6 @@ void starSeq(int *loadType, int*players, int*gameVar)
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//a
 void readDeck(card deck[], FILE*inp)
 {
     char color[7];
