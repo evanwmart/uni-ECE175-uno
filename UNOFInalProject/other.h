@@ -11,12 +11,12 @@
 #include <stdio.h>
 
 typedef struct card_s {
-            char color[7];
-            int value;
-            char action[15];
-            struct card_s *t;   //next node
-            struct card_s *h;   //prev node
-            int index;
+    char color[7];
+    int value;
+    char action[15];
+    struct card_s *t;   //next node
+    struct card_s *h;   //prev node
+    int position;
 } card;
 
 void shuffle(card deck[], int size);
@@ -24,6 +24,7 @@ void shuffle(card deck[], int size);
 void readDeck(card deck[]);
 
 void starSeq(int *loadType, int*players, int*gameVar);
+
 
 
 #endif /* other_h */

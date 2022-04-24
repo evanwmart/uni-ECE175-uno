@@ -8,25 +8,33 @@
 #include <stdlib.h>
 #include "other.h"
 #include <assert.h>
+#include <stdbool.h>
 #define SIZE 100
 
 int main (void)
 {
-    /*
-    int loadType = 0, players = 0, gameVar = 0;
-    int* loadPt = &loadType;
-    int* playersPt = &players;
-    int* gameVarPt = &gameVar;
-    starSeq(loadPt, playersPt, gameVarPt);
     
-    startsequence();
+    int loadType = 0, numPlayers = 0, gameVar = 0;
+    int* loadPt = &loadType;
+    int* playersPt = &numPlayers;
+    int* gameVarPt = &gameVar;
+    
+    starSeq(loadPt, playersPt, gameVarPt);
      
-    create players
-     
+    card *players;
+    players = (card*)calloc(numPlayers, sizeof(card));
+    for (int i = 0; i < numPlayers; i++)
+    {
+        players[i].h = NULL;
+        players[i].t = NULL;
+        players[i].position = i + 1;
+    }
+    
+    bool win = false;
     while(!win)
     {
     
-     prompt player's turn
+     //prompt player's turn
      
      player selects card
         move card to played cards

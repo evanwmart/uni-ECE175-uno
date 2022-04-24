@@ -95,3 +95,5 @@ void readDeck(card deck[])
         cardNum++;
     }
 }
+
+
