@@ -30,12 +30,21 @@ int main (void)
         players[i].position = i + 1;
     }
     
+    for(int i = 0; i < 7; i++)
+    {
+        for (int j = 0; j < numPlayers; j++)
+        {
+            drawCard(players[i]);
+        }
+    }
+    
     bool win = false;
+    int turn = 0;
+    int direction = 1;
     while(!win)
     {
-    
-     //prompt player's turn
-     
+        promptPlayer(discard, players[turn]);
+        
      player selects card
         move card to played cards
         remove card from players hand
