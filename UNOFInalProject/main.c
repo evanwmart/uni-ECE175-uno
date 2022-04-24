@@ -18,10 +18,27 @@ int main (void)
     int* playersPt = &players;
     int* gameVarPt = &gameVar;
     starSeq(loadPt, playersPt, gameVarPt);
-     */
-    card deck[108];
     
-    readDeck(deck);
+    startsequence();
+     
+    create players
+     
+    while(!win)
+    {
+    
+     prompt player's turn
+     
+     player selects card
+        move card to played cards
+        remove card from players hand
+     
+     check players hand amount
+        if zero set win to true
+     
+     read card and determine next player and action
+        
+    }
+     */
     
     return 0;
 }
