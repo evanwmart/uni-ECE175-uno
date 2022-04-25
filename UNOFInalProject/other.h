@@ -11,7 +11,7 @@
 #include <stdio.h>
 
 typedef struct card_s {
-    char color[7];
+    char color;
     int value;
     char action[15];
     struct card_s *t;   //next node
@@ -23,7 +23,7 @@ void shuffle(card deck[], int size);
 
 void readDeck(card deck[]);
 
-void starSeq(int *loadType, int*players, int*gameVar);
+void startSeq(int *loadType, int*players, int*gameVar);
 
 void printHand(card head);
 

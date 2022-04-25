@@ -25,7 +25,7 @@ void shuffle(card deck[], int size)
     }
 }
 
-void starSeq(int *loadType, int*players, int*gameVar)
+void startSeq(int *loadType, int*players, int*gameVar)
 {
 
     printf("Let’s Play a Game of UNO\n");
@@ -81,17 +81,14 @@ void readDeck(card deck[])
 {
     FILE*inp;
     inp = fopen("deck.txt", "r");
-    char color[7];
+    char color;
     int value, cardNum = 0;
-    while (fscanf(inp, "%d %s", &value, color) != EOF)
+    while (fscanf(inp, "%d %c\n", &value, &color) != EOF)
     {
-        //fscanf(inp, "%d %s", &value, color);
-        //fgets(color, 15, inp);
-        //color[strlen(color) - 1] = '\0';
         card *pt;
         pt = &deck[cardNum];
         pt->value = value;
-        strcpy(pt->color, color);
+        pt->color = color;
         cardNum++;
     }
 }
@@ -125,7 +122,7 @@ void printHand(card head)
     //2
     for (int i = 0; i < count; i++)
     {
-        printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
+        printf("⠯ %c ⠽⠿⠿⠿⠿\t", array[i].color);
     }
     printf("\n");
     
@@ -153,7 +150,7 @@ void printHand(card head)
     //6
     for (int i = 0; i < count; i++)
     {
-        printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
+        printf("⠿⠿⠿⠿⠯ %c ⠽\t", array[i].color);
     }
     printf("\n");
     
