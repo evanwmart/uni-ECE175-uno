@@ -105,59 +105,62 @@ void printHand(card head)
         count++;
         instance = *instance.t;
     }
-    card array[count];
+    card array[count+1];
     instance = head;
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count+1; i++)
     {
         array[i] = instance;
-        instance = *instance.t;
+        if(instance.t != NULL)
+        {
+            instance = *instance.t;
+        }
     }
     //1
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count+1; i++)
     {
-        printf(" ⠴⠖⠒⠲⠶⠶⠶⠶⠄");
+        printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
     }
     printf("\n");
     
     //2
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count+1; i++)
     {
-        printf(" ⠯ %s ⠽⠿⠿⠿⠿", array[i].color);
+        printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
     }
     printf("\n");
     
     //3
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count+1; i++)
     {
-        printf(" ⠿⠷⠖⠚⠛⠛⠻⠿⠇");
+        printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
     }
     printf("\n");
 
     //4
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count+1; i++)
     {
-        printf(" ⠿⠇%d⠸⠿", array[i].value);
+        printf("⠿⠇-----⠸⠿\t");
     }
     printf("\n");
     
     //5
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count+1; i++)
     {
-        printf(" ⠿⠿⠷⠶⠶⠖⠚⠻⠇");
+        printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
     }
     printf("\n");
     
     //6
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count+1; i++)
     {
-        printf(" ⠿⠿⠿⠿⠯ %s ⠽", array[i].color);
+        printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
     }
     printf("\n");
     
     //7
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count+1; i++)
     {
-        printf(" ⠙⠛⠛⠛⠛⠓⠒⠚⠁");
+        printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
     }
     printf("\n");
 }
