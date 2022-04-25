@@ -14,29 +14,7 @@
 
 int main (void)
 {
-    card head, one, two, three;
     
-    head.value = 0;
-    strcpy(head.color, "X");
-    head.h = NULL;
-    head.t = &one;
-    
-    one.value = 1;
-    strcpy(one.color, "A");
-    one.h = &head;
-    one.t = &two;
-    
-    two.value = 2;
-    strcpy(two.color, "B");
-    two.h = &one;
-    two.t = &three;
-    
-    three.value = 3;
-    strcpy(three.color, "C");
-    three.h = &two;
-    three.t = NULL;
-    
-    printHand(head);
     
     /*
     int loadType = 0, numPlayers = 0, gameVar = 0;

@@ -106,8 +106,8 @@ void printHand(card head)
         instance = *instance.t;
     }
     card array[count+1];
-    instance = head;
-    for (int i = 0; i < count+1; i++)
+    instance = *head.t;
+    for (int i = 0; i < count; i++)
     {
         array[i] = instance;
         if(instance.t != NULL)
@@ -116,49 +116,49 @@ void printHand(card head)
         }
     }
     //1
-    for (int i = 0; i < count+1; i++)
+    for (int i = 0; i < count; i++)
     {
         printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
     }
     printf("\n");
     
     //2
-    for (int i = 0; i < count+1; i++)
+    for (int i = 0; i < count; i++)
     {
         printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
     }
     printf("\n");
     
     //3
-    for (int i = 0; i < count+1; i++)
+    for (int i = 0; i < count; i++)
     {
         printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
     }
     printf("\n");
 
     //4
-    for (int i = 0; i < count+1; i++)
+    for (int i = 0; i < count; i++)
     {
         printf("⠿⠇-----⠸⠿\t");
     }
     printf("\n");
     
     //5
-    for (int i = 0; i < count+1; i++)
+    for (int i = 0; i < count; i++)
     {
         printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
     }
     printf("\n");
     
     //6
-    for (int i = 0; i < count+1; i++)
+    for (int i = 0; i < count; i++)
     {
         printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
     }
     printf("\n");
     
     //7
-    for (int i = 0; i < count+1; i++)
+    for (int i = 0; i < count; i++)
     {
         printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
     }
