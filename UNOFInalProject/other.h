@@ -25,7 +25,7 @@ void readDeck(card deck[]);
 
 void starSeq(int *loadType, int*players, int*gameVar);
 
-
+void printHand(card head);
 
 #endif /* other_h */
 

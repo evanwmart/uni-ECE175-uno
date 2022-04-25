@@ -96,4 +96,69 @@ void readDeck(card deck[])
     }
 }
 
+void printHand(card head)
+{
+    card instance = head;
+    int count = 0;
+    while (instance.t != NULL)
+    {
+        count++;
+        instance = *instance.t;
+    }
+    card array[count];
+    instance = head;
+    for (int i = 0; i < count; i++)
+    {
+        array[i] = instance;
+        instance = *instance.t;
+    }
+    //1
+    for (int i = 0; i < count; i++)
+    {
+        printf(" ⠴⠖⠒⠲⠶⠶⠶⠶⠄");
+    }
+    printf("\n");
+    
+    //2
+    for (int i = 0; i < count; i++)
+    {
+        printf(" ⠯ %s ⠽⠿⠿⠿⠿", array[i].color);
+    }
+    printf("\n");
+    
+    //3
+    for (int i = 0; i < count; i++)
+    {
+        printf(" ⠿⠷⠖⠚⠛⠛⠻⠿⠇");
+    }
+    printf("\n");
+
+    //4
+    for (int i = 0; i < count; i++)
+    {
+        printf(" ⠿⠇%d⠸⠿", array[i].value);
+    }
+    printf("\n");
+    
+    //5
+    for (int i = 0; i < count; i++)
+    {
+        printf(" ⠿⠿⠷⠶⠶⠖⠚⠻⠇");
+    }
+    printf("\n");
+    
+    //6
+    for (int i = 0; i < count; i++)
+    {
+        printf(" ⠿⠿⠿⠿⠯ %s ⠽", array[i].color);
+    }
+    printf("\n");
+    
+    //7
+    for (int i = 0; i < count; i++)
+    {
+        printf(" ⠙⠛⠛⠛⠛⠓⠒⠚⠁");
+    }
+    printf("\n");
+}
 
