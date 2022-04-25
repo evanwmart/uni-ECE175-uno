@@ -14,6 +14,7 @@
 int main (void)
 {
     
+    /*
     int loadType = 0, numPlayers = 0, gameVar = 0;
     int* loadPt = &loadType;
     int* playersPt = &numPlayers;
