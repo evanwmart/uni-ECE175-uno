@@ -34,6 +34,8 @@ void drawCard(card head, card deck[], int *cardsLeft);
 
 card playCard(card head, int cardPos, int *numDisgard);
 
+int promptPlayer(card head); // printTopCard(), printHand(), cardCount() --- returns desired crd position to play
+
 #endif /* other_h */
 
 /*

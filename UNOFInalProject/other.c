@@ -265,12 +265,29 @@ void drawCard(card head, card deck[], int *cardsLeft)
     }
 }
 
+
+
 card playCard(card head, int cardPos, int *numDisgard){
     
     
     
     
     
+  
     
-    return 
+    
+    
+    return ;
 }
+
+
+int promptPlayer(card head){
+    
+    
+    
+    
+    
+    
+    return ;
+}
+
