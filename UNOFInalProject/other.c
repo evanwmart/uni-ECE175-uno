@@ -265,21 +265,22 @@ void drawCard(card head, card deck[], int *cardsLeft)
     }
 }
 
-
-
-//card playCard(card head, int cardPos, int *numDisgard){
-    
-    
-    
-    
-    
-  
-    
-    
-    
-//    return ;
-//}
-
+void playCard(card head, int cardPos, int *numDiscard, card deck[])
+{
+    card instance = head;
+    for (int i = 0; i < cardPos; i++)
+    {
+        instance = *instance.t;
+    }
+    card *pt = &deck[107];
+    for (int i = *numDiscard; i < 107; i++)
+    {
+        pt = &deck[i+1];
+        *pt = deck[i];
+    }
+    *pt = instance;
+    *numDiscard += 1;
+}
 
 int promptPlayer(card head, card deck[]){
     printTopCard(deck);
