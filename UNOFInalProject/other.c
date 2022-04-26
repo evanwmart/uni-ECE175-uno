@@ -267,7 +267,7 @@ void drawCard(card head, card deck[], int *cardsLeft)
 
 
 
-card playCard(card head, int cardPos, int *numDisgard){
+//card playCard(card head, int cardPos, int *numDisgard){
     
     
     
@@ -277,17 +277,18 @@ card playCard(card head, int cardPos, int *numDisgard){
     
     
     
-    return ;
-}
+//    return ;
+//}
 
 
 int promptPlayer(card head, card deck[]){
     printTopCard(deck);
     printHand(head);
+    
     int count = cardCount(head);
     
-    printf("Press 1 -  %d\n", count);
-    
+    printf("Press 1-%d to play any card from your hand, or press zero to draw a card from the deck:\n", count);
+    scanf("%d", &count);
     
     
     
