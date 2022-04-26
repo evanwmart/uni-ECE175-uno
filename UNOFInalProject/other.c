@@ -303,5 +303,4 @@ bool cardCheck(card cardPlayed, card base){ //checks if the users selected card 
     else{
         return false;
     }
-
 }
