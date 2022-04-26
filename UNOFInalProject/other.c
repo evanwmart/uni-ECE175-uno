@@ -281,13 +281,19 @@ card playCard(card head, int cardPos, int *numDisgard){
 }
 
 
-int promptPlayer(card head){
+int promptPlayer(card head, card deck[]){
+    printTopCard(deck);
+    printHand(head);
+    int count = cardCount(head);
+    
+    printf("Press 1 -  %d\n", count);
     
     
     
     
     
     
-    return ;
+    
+    return count;
 }
 
