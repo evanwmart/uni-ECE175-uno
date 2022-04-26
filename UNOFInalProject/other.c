@@ -242,7 +242,8 @@ int cardCount(card head)
 
 //function to draw a card from the deck to a player's hand & then shift the unplayed cards down 1 in the deck array
 //input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
-void drawCard(card head, card deck[], int *cardsLeft){
+void drawCard(card head, card deck[], int *cardsLeft)
+{
     
     card instance = head;
     while(instance.t != NULL)
@@ -262,4 +263,14 @@ void drawCard(card head, card deck[], int *cardsLeft){
         pt = &deck[i];
         *pt = deck[i+1];
     }
+}
+
+card playCard(card head, int cardPos, int *numDisgard){
+    
+    
+    
+    
+    
+    
+    return 
 }

@@ -32,6 +32,8 @@ int cardCount(card head);
 
 void drawCard(card head, card deck[], int *cardsLeft);
 
+card playCard(card head, int cardPos, int *numDisgard);
+
 #endif /* other_h */
 
 /*
