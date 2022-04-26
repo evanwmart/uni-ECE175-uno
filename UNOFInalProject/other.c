@@ -77,10 +77,10 @@ void startSeq(int *loadType, int*players, int*gameVar)
     }
 }
 
-void readDeck(card deck[])
+void readDeck(card deck[], char fileName[])
 {
     FILE*inp;
-    inp = fopen("deck.txt", "r");
+    inp = fopen(fileName, "r");
     char color;
     int value, cardNum = 0;
     while (fscanf(inp, "%d %c\n", &value, &color) != EOF)
@@ -177,7 +177,7 @@ int cardCount(card head)
     return count;
 }
 
-void drawcard(card head, card deck[], int *cardsLeft){
+void drawCard(card head, card deck[], int *cardsLeft){
     
     card instance = head;
     while(instance.t != NULL)

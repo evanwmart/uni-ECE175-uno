@@ -20,6 +20,7 @@ int main (void)
     int* playersPt = &numPlayers;
     int* gameVarPt = &gameVar;
     int *numCards = &cardsLeft;
+    card deck[108];
     
     startSeq(loadPt, playersPt, gameVarPt);
      
@@ -36,9 +37,7 @@ int main (void)
     {
         for (int j = 0; j < numPlayers; j++)
         {
-            
-            
-            
+            drawCard(player[i], deck, numCards);
         }
     }
     
