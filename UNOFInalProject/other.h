@@ -14,9 +14,8 @@ typedef struct card_s {
     char color;
     int value;
     char action[15];
-    struct card_s *t;   //next node
-    struct card_s *h;   //prev node
-    int position;
+    struct card_s *t;   //next card
+    struct card_s *h;   //prev card
 } card;
 
 void shuffle(card deck[], int size);
@@ -31,8 +30,7 @@ void printTopCard(card deck[]);
 
 int cardCount(card head);
 
-void drawCard(card head, card deck[], int *cardsLeft); //moves 1 card from the top of the deck into a player's hand (linked list)
-// the ^ input is the player's head card
+void drawCard(card head, card deck[], int *cardsLeft);
 
 #endif /* other_h */
 
@@ -40,7 +38,7 @@ void drawCard(card head, card deck[], int *cardsLeft); //moves 1 card from the t
  ⠴⠖⠒⠲⠶⠶⠶⠶⠄
  ⠯ ♠ ⠽⠿⠿⠿⠿
  ⠿⠷⠖⠚⠛⠛⠻⠿⠇
- ⠿⠇ SKIP⠸⠿
+ ⠿⠇-----⠸⠿
  ⠿⠿⠷⠶⠶⠖⠚⠻⠇
  ⠿⠿⠿⠿⠯ ♠ ⠽
  ⠙⠛⠛⠛⠛⠓⠒⠚⠁
