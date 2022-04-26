@@ -7,6 +7,7 @@
 
 #ifndef other_h
 #define other_h
+#include <stdbool.h>
 
 #include <stdio.h>
 
@@ -35,6 +36,9 @@ void drawCard(card head, card deck[], int *cardsLeft);
 void playCard(card head, int cardPos, int *numDiscard, card deck[]);
 
 int promptPlayer(card head, card deck[]); // printTopCard(), printHand(), cardCount() --- returns desired crd position to play
+
+bool cardCheck(card cardPlayed, card base); //if(cardPlayed.value!=base.value)
+
 
 #endif /* other_h */
 

@@ -265,7 +265,7 @@ void drawCard(card head, card deck[], int *cardsLeft)
     }
 }
 
-void playCard(card head, int cardPos, int *numDiscard, card deck[])
+void playCard(card head, int cardPos, int *numDiscard, card deck[]) // moves the card from the players hand to the discard pile
 {
     card instance = head;
     for (int i = 0; i < cardPos; i++)
@@ -282,7 +282,9 @@ void playCard(card head, int cardPos, int *numDiscard, card deck[])
     *numDiscard += 1;
 }
 
-int promptPlayer(card head, card deck[]){
+int promptPlayer(card head, card deck[]){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
+    
+    
     printTopCard(deck);
     printHand(head);
     
@@ -299,3 +301,14 @@ int promptPlayer(card head, card deck[]){
     return count;
 }
 
+bool cardCheck(card cardPlayed, card base){ //checks if the users selected card is a valid card to play
+    
+    
+    if((cardPlayed.value==base.value) || (cardPlayed.color==base.color)){
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
