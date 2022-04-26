@@ -62,6 +62,3 @@ int promptPlayer(card head, card deck[]); // printTopCard(), printHand(), cardCo
  ⠿⠿⠿⠿⠯ ♠ ⠽
  ⠙⠛⠛⠛⠛⠓⠒⠚⠁
  */
-
-
-p
