@@ -28,6 +28,7 @@ int main (void)
     player = (card*)calloc(numPlayers, sizeof(card));
     for (int i = 0; i < numPlayers; i++)
     {
+        player[i].value = i+1;
         player[i].h = NULL;
         player[i].t = NULL;
         player[i].position = i + 1;
@@ -42,8 +43,8 @@ int main (void)
     }
     
     bool win = false;
-    //int turn = 0;
-    //int direction = 1;
+    //int pturn = 0;
+    //int pdirection = 1;
     while(!win)
     {
         //promptPlayer(discard, players[turn]);

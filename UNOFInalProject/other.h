@@ -27,6 +27,8 @@ void startSeq(int *loadType, int*players, int*gameVar);
 
 void printHand(card head);
 
+void printTopCard(card deck[]);
+
 int cardCount(card head);
 
 void drawCard(card head, card deck[], int *cardsLeft); //moves 1 card from the top of the deck into a player's hand (linked list)
