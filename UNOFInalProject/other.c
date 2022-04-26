@@ -10,6 +10,8 @@
 #include <string.h>
 #include "other.h"
 
+//function to shuffle an array
+//input: the array and the index number of which empty slots start
 void shuffle(card deck[], int size)
 {
     card * pt;
@@ -25,6 +27,8 @@ void shuffle(card deck[], int size)
     }
 }
 
+//function for the startup sequence
+//input: 3 int pointers
 void startSeq(int *loadType, int*players, int*gameVar)
 {
 
@@ -77,6 +81,8 @@ void startSeq(int *loadType, int*players, int*gameVar)
     }
 }
 
+//function to load in a deck from file
+//input: deck array and file name
 void readDeck(card deck[], char fileName[])
 {
     FILE*inp;
@@ -93,6 +99,8 @@ void readDeck(card deck[], char fileName[])
     }
 }
 
+//function to print a players hand
+//input: the initial "head" card in the respective player's linked list
 void printHand(card head)
 {
     card instance = head;
@@ -203,6 +211,8 @@ void printHand(card head)
     printf("\n");
 }
 
+//function to print the last played card (top of discard pile)
+//input: the deck array
 void printTopCard(card deck[])
 {
     printf("Discard pile:\n");
@@ -230,6 +240,8 @@ int cardCount(card head)
     return count;
 }
 
+//function to draw a card from the deck to a player's hand & then shift the unplayed cards down 1 in the deck array
+//input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
 void drawCard(card head, card deck[], int *cardsLeft){
     
     card instance = head;
@@ -250,7 +262,4 @@ void drawCard(card head, card deck[], int *cardsLeft){
         pt = &deck[i];
         *pt = deck[i+1];
     }
-    
-    //TO DO
-} //moves 1 card from the top of the deck into a player's hand (linked list)
-// the ^ input is the player's head card
+}
