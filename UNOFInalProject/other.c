@@ -162,3 +162,42 @@ void printHand(card head)
     printf("\n");
 }
 
+int cardCount(card head)
+{
+    card instance = head;
+    int count = 0;
+    while(instance.t != NULL)
+    {
+        if (instance.t != NULL)
+        {
+            instance = *instance.t;
+            count++;
+        }
+    }
+    return count;
+}
+
+void drawcard(card head, card deck[], int *cardsLeft){
+    
+    card instance = head;
+    while(instance.t != NULL)
+    {
+        instance = *instance.t;
+    }
+    
+    card drawnCard = deck[0];
+    
+    instance.t = &drawnCard;
+    drawnCard.h = &instance;
+    drawnCard.t = NULL;
+    
+    card *pt;
+    for (int i = 0; i < *cardsLeft; i++)
+    {
+        pt = &deck[i];
+        *pt = deck[i+1];
+    }
+    
+    //TO DO
+} //moves 1 card from the top of the deck into a player's hand (linked list)
+// the ^ input is the player's head card
