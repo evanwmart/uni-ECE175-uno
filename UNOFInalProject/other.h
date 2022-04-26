@@ -32,15 +32,21 @@ int cardCount(card head);
 
 void drawCard(card head, card deck[], int *cardsLeft);
 
-card playCard(card head, int cardPos, int *numDisgard)
+void playCard(card head, int cardPos, int *numDiscard, card deck[])
 {
-    instance = head
+    card instance = head;
     for (int i = 0; i < cardPos; i++)
     {
         instance = *instance.t;
     }
-    
-    return playedCard;
+    card *pt = &deck[107];
+    for (int i = *numDiscard; i < 107; i++)
+    {
+        pt = &deck[i+1];
+        *pt = deck[i];
+    }
+    *pt = instance;
+    *numDiscard += 1;
 }
 
 int promptPlayer(card head, card deck[]); // printTopCard(), printHand(), cardCount() --- returns desired crd position to play
