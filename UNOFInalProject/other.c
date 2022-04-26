@@ -284,7 +284,6 @@ void playCard(card head, int cardPos, int *numDiscard, card deck[]) // moves the
 
 int promptPlayer(card head, card deck[]){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
     
-    
     printTopCard(deck);
     printHand(head);
     
@@ -293,16 +292,10 @@ int promptPlayer(card head, card deck[]){ //prompts the player which card they w
     printf("Press 1-%d to play any card from your hand, or press zero to draw a card from the deck:\n", count);
     scanf("%d", &count);
     
-    
-    
-    
-    
-    
     return count;
 }
 
-bool cardCheck(card cardPlayed, card base){ //checks if the users selected card is a valid card to play
-    
+bool cardCheck(card cardPlayed, card base){ //checks if the users selected card is a valid card to play by verifying that either the card played number is equal to the base card number or if the color of the card played is the same as the color of the base card
     
     if((cardPlayed.value==base.value) || (cardPlayed.color==base.color)){
         return true;
