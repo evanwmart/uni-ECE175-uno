@@ -31,7 +31,6 @@ int main (void)
         player[i].value = i+1;
         player[i].h = NULL;
         player[i].t = NULL;
-        player[i].position = i + 1;
     }
     
     for(int i = 0; i < 7; i++)
