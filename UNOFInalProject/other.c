@@ -282,21 +282,23 @@ void drawCard(card head, card deck[], int *cardsLeft)
     }
 }
 
-void playCard(card head, int cardPos, int *numDiscard, card deck[]) // moves the card from the players hand to the discard pile
+void playCard(card head, int cardPos, int *cardsLeft, card deck[]) // moves the card from the players hand to the discard pile
 {
-    card instance = head;
+    card *instance = &head;
     for (int i = 0; i < cardPos; i++)
     {
-        instance = *instance.t;
+        instance = instance->t;
     }
-    card *pt = &deck[107];
-    for (int i = *numDiscard; i < 107; i++)
+    
+    card *pt;
+    for (int i = *cardsLeft; i < 107; i++)
     {
-        pt = &deck[i+1];
-        *pt = deck[i];
+        pt = &deck[i];
+        *pt = deck[i + 1];
     }
-    *pt = instance;
-    *numDiscard += 1;
+    pt = &deck[107];
+    pt = instance;
+    free(instance);
 }
 
 int promptPlayer(card head, card deck[]){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
