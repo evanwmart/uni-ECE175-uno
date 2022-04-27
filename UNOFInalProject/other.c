@@ -83,20 +83,29 @@ void startSeq(int *loadType, int*players, int*gameVar)
 
 //function to load in a deck from file
 //input: deck array and file name
-void readDeck(card deck[], char fileName[])
+bool readDeck(card deck[], char fileName[])
 {
     FILE*inp;
     inp = fopen(fileName, "r");
-    char color;
-    int value, cardNum = 0;
-    while (fscanf(inp, "%d %c\n", &value, &color) != EOF)
+    int cardNum = 0;
+    card *pt;
+    
+    if(inp == NULL)
     {
-        card *pt;
-        pt = &deck[cardNum];
-        pt->value = value;
-        pt->color = color;
-        cardNum++;
+        printf("File \"%s\" not found.\n", fileName);
+        return false;
     }
+    else{
+        while (!feof(inp) && cardNum < 108)
+        {
+            pt = deck;
+            char dump;
+            fscanf(inp, "%d ", &pt[cardNum].value);
+            fscanf(inp, "%s%c", pt[cardNum].color, &dump);
+            cardNum++;
+        }
+    }
+    return true;
 }
 
 //function to print a players hand
@@ -244,7 +253,6 @@ int cardCount(card head)
 //input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
 void drawCard(card head, card deck[], int *cardsLeft)
 {
-    
     card instance = head;
     while(instance.t != NULL)
     {

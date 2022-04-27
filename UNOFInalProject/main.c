@@ -15,6 +15,7 @@
 int main (void)
 {
     
+    /*
     int loadType = 0, numPlayers = 0, gameVar = 0, cardsLeft = 108;
     int* loadPt = &loadType;
     int* playersPt = &numPlayers;
@@ -58,8 +59,40 @@ int main (void)
      read card and determine next player and action
          */
         
+    //}
+
+    card deck[108];
+    char fileName[50];
+    printf("Enter file name:");
+    fgets(fileName, 50, stdin);
+    fileName[strlen(fileName) - 1] = '\0';
+    if(readDeck(deck, fileName))
+    {
+        for(int i = 0; i < 108; i++)
+        {
+            printf("%d%s ", deck[i].value, deck[i].color);
+        }
     }
+    /*
      
-    
+
+     void readDeck(card deck[], char fileName[]);
+
+     void startSeq(int *loadType, int*players, int*gameVar);
+
+     void printHand(card head);
+
+     void printTopCard(card deck[]);
+
+     int cardCount(card head);
+
+     void drawCard(card head, card deck[], int *cardsLeft);
+
+     void playCard(card head, int cardPos, int *numDiscard, card deck[]);
+
+     int promptPlayer(card head, card deck[]);
+
+     bool cardCheck(card cardPlayed, card base);
+     */
     return 0;
 }
