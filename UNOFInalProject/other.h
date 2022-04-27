@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 typedef struct card_s {
-    char color;
+    char color[7];
     int value;
     char action[15];
     struct card_s *t;   //next card
@@ -21,7 +21,7 @@ typedef struct card_s {
 
 void shuffle(card deck[], int size);
 
-void readDeck(card deck[], char fileName[]);
+bool readDeck(card deck[], char fileName[]);
 
 void startSeq(int *loadType, int*players, int*gameVar);
 
@@ -38,7 +38,6 @@ void playCard(card head, int cardPos, int *numDiscard, card deck[]);
 int promptPlayer(card head, card deck[]); // printTopCard(), printHand(), cardCount() --- returns desired crd position to play
 
 bool cardCheck(card cardPlayed, card base); //if(cardPlayed.value!=base.value)
-
 
 #endif /* other_h */
 

@@ -36,7 +36,7 @@ void startSeq(int *loadType, int*players, int*gameVar)
     
     while(!(*players < 11 && 0 < *players))
     {
-    printf("We can accomodate up to 1-10 players.\nHow many players are participating? ");
+    printf("We can accomodate 1-10 players.\nHow many players are participating? ");
     scanf("%d", players);
         if (*players < 1 || 10 < *players)
         {
@@ -83,20 +83,29 @@ void startSeq(int *loadType, int*players, int*gameVar)
 
 //function to load in a deck from file
 //input: deck array and file name
-void readDeck(card deck[], char fileName[])
+bool readDeck(card deck[], char fileName[])
 {
     FILE*inp;
     inp = fopen(fileName, "r");
-    char color;
-    int value, cardNum = 0;
-    while (fscanf(inp, "%d %c\n", &value, &color) != EOF)
+    int cardNum = 0;
+    card *pt;
+    
+    if(inp == NULL)
     {
-        card *pt;
-        pt = &deck[cardNum];
-        pt->value = value;
-        pt->color = color;
-        cardNum++;
+        printf("File \"%s\" not found.\n", fileName);
+        return false;
     }
+    else{
+        while (!feof(inp) && cardNum < 108)
+        {
+            pt = deck;
+            char dump;
+            fscanf(inp, "%d ", &pt[cardNum].value);
+            fscanf(inp, "%s%c", pt[cardNum].color, &dump);
+            cardNum++;
+        }
+    }
+    return true;
 }
 
 //function to print a players hand
@@ -171,7 +180,7 @@ void printHand(card head)
     //2
     for (int i = 0; i < count; i++)
     {
-        printf("⠯ %c ⠽⠿⠿⠿⠿\t", array[i].color);
+        printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
     }
     printf("\n");
     
@@ -199,7 +208,7 @@ void printHand(card head)
     //6
     for (int i = 0; i < count; i++)
     {
-        printf("⠿⠿⠿⠿⠯ %c ⠽\t", array[i].color);
+        printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
     }
     printf("\n");
     
@@ -217,11 +226,11 @@ void printTopCard(card deck[])
 {
     printf("Discard pile:\n");
     printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄ \n");
-    printf("⠯ %c ⠽⠿⠿⠿⠿\n", deck[107].color);
+    printf("⠯ %s ⠽⠿⠿⠿⠿\n", deck[107].color);
     printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇ \n");
     printf("⠿⠇-%2d--⠸⠿\n", deck[107].value);
     printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇ \n");
-    printf("⠿⠿⠿⠿⠯ %c ⠽\n", deck[107].color);
+    printf("⠿⠿⠿⠿⠯ %s ⠽\n", deck[107].color);
     printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁ \n");
 }
 
@@ -244,18 +253,17 @@ int cardCount(card head)
 //input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
 void drawCard(card head, card deck[], int *cardsLeft)
 {
+    card *instance = &head;
     
-    card instance = head;
-    while(instance.t != NULL)
+    while(instance->t != NULL)
     {
-        instance = *instance.t;
+        instance = instance->t;
     }
     
-    card drawnCard = deck[0];
-    
-    instance.t = &drawnCard;
-    drawnCard.h = &instance;
-    drawnCard.t = NULL;
+    card newCard;
+    instance->t = &newCard;
+    newCard.h = instance;
+    newCard.t = NULL;
     
     card *pt;
     for (int i = 0; i < *cardsLeft; i++)
