@@ -22,8 +22,6 @@ int main (void)
     int* gameVarPt = &gameVar;
     int *numCards = &cardsLeft;
     card deck[108];
-     
-    
     
     startSeq(loadPt, playersPt, gameVarPt);
      
@@ -59,18 +57,36 @@ int main (void)
         if zero set win to true
      
      read card and determine next player and action
-         
-        
     }
      */
     
     
+    card head, one, two, three;
+    head.h = NULL;
+    head.t = &one;
+    head.value = 0;
+    strcpy(head.color, "X");
+    
+    one.h = &head;
+    one.t = &two;
+    one.value = 1;
+    strcpy(one.color, "A");
+    
+    two.h = &one;
+    two.t = &three;
+    two.value = 2;
+    strcpy(two.color, "B");
+    
+    three.h = &two;
+    three.t = NULL;
+    three.value = 3;
+    strcpy(three.color, "C");
+    
+    printHand(head);
+
+
     
     /*
-
-     void printHand(card head);
-
-     void printTopCard(card deck[]);
 
      int cardCount(card head);
 
@@ -82,5 +98,6 @@ int main (void)
 
      bool cardCheck(card cardPlayed, card base);
      */
+    
     return 0;
 }
