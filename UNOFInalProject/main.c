@@ -62,7 +62,7 @@ int main (void)
     card deck[10];
     deck[0].value = 0;
     strcpy(deck[0].color, "D");
-    
+   
     for(int i = 1; i < 10; i++)
     {
         deck[i].value = i;
@@ -72,7 +72,7 @@ int main (void)
         printf("%d - ", deck[i].value);
     }
     printf("\n");
-    
+   
     card head, one, two, three;
     head.h = NULL;
     head.t = &one;
@@ -90,16 +90,15 @@ int main (void)
     three.t = NULL;
     three.value = 3;
     strcpy(three.color, "C");
-    
+   
     printf("Before Draw:\n");
     printHand(head);
-    
+   
     int cL = 10;
     int *cpt = &cL;
-    
-    card *drawn = (card*)malloc(sizeof(card));
-    drawCard(head, deck, drawn[0], cpt);
-    
+   
+    drawCard(head, deck, cpt);
+   
     printf("After Draw:\n");
     printHand(head);
     for(int i = 1; i < 10; i++)
@@ -107,6 +106,7 @@ int main (void)
         printf("%d - ", deck[i].value);
     }
     printf("\n");
+
     
     /*
 

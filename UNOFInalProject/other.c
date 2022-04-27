@@ -251,20 +251,21 @@ int cardCount(card head)
 
 //function to draw a card from the deck to a player's hand & then shift the unplayed cards down 1 in the deck array
 //input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
-void drawCard(card head, card deck[], card newC, int *cardsLeft)
+void drawCard(card head, card deck[], int *cardsLeft)
 {
     card *instance = &head;
-    card *Pt = &newC;
+    card *temp, *Pt;
+    temp = (card *)malloc(sizeof(card));
     
     while(instance->t != NULL)
     {
         instance = instance->t;
     }
     
-    instance->t = Pt;
-    *Pt = deck[0];
-    Pt->h = instance;
-    Pt->t = NULL;
+    instance->t = temp;
+    *temp = deck[0];
+    temp->h = instance;
+    temp->t = NULL;
     *cardsLeft -= 1;
     
     for (int i = 0; i < *cardsLeft; i++)
@@ -279,24 +280,25 @@ void drawCard(card head, card deck[], card newC, int *cardsLeft)
             Pt->t = NULL;
         }
     }
-    
 }
 
-void playCard(card head, int cardPos, int *numDiscard, card deck[]) // moves the card from the players hand to the discard pile
+void playCard(card head, int cardPos, int *cardsLeft, card deck[]) // moves the card from the players hand to the discard pile
 {
-    card instance = head;
+    card *instance = &head;
     for (int i = 0; i < cardPos; i++)
     {
-        instance = *instance.t;
+        instance = instance->t;
     }
-    card *pt = &deck[107];
-    for (int i = *numDiscard; i < 107; i++)
+    
+    card *pt;
+    for (int i = *cardsLeft; i < 107; i++)
     {
-        pt = &deck[i+1];
-        *pt = deck[i];
+        pt = &deck[i];
+        *pt = deck[i + 1];
     }
-    *pt = instance;
-    *numDiscard += 1;
+    pt = &deck[107];
+    pt = instance;
+    free(instance);
 }
 
 int promptPlayer(card head, card deck[]){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
