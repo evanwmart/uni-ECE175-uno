@@ -97,7 +97,8 @@ int main (void)
     int cL = 10;
     int *cpt = &cL;
     
-    drawCard(head, deck, cpt);
+    card *drawn = (card*)malloc(sizeof(card));
+    drawCard(head, deck, drawn[0], cpt);
     
     printf("After Draw:\n");
     printHand(head);
