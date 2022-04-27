@@ -36,7 +36,7 @@ void startSeq(int *loadType, int*players, int*gameVar)
     
     while(!(*players < 11 && 0 < *players))
     {
-    printf("We can accomodate up to 1-10 players.\nHow many players are participating? ");
+    printf("We can accomodate 1-10 players.\nHow many players are participating? ");
     scanf("%d", players);
         if (*players < 1 || 10 < *players)
         {
@@ -180,7 +180,7 @@ void printHand(card head)
     //2
     for (int i = 0; i < count; i++)
     {
-        printf("⠯ %c ⠽⠿⠿⠿⠿\t", array[i].color);
+        printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
     }
     printf("\n");
     
@@ -208,7 +208,7 @@ void printHand(card head)
     //6
     for (int i = 0; i < count; i++)
     {
-        printf("⠿⠿⠿⠿⠯ %c ⠽\t", array[i].color);
+        printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
     }
     printf("\n");
     
@@ -226,11 +226,11 @@ void printTopCard(card deck[])
 {
     printf("Discard pile:\n");
     printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄ \n");
-    printf("⠯ %c ⠽⠿⠿⠿⠿\n", deck[107].color);
+    printf("⠯ %s ⠽⠿⠿⠿⠿\n", deck[107].color);
     printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇ \n");
     printf("⠿⠇-%2d--⠸⠿\n", deck[107].value);
     printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇ \n");
-    printf("⠿⠿⠿⠿⠯ %c ⠽\n", deck[107].color);
+    printf("⠿⠿⠿⠿⠯ %s ⠽\n", deck[107].color);
     printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁ \n");
 }
 

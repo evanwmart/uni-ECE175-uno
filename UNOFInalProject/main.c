@@ -22,6 +22,8 @@ int main (void)
     int* gameVarPt = &gameVar;
     int *numCards = &cardsLeft;
     card deck[108];
+     
+    
     
     startSeq(loadPt, playersPt, gameVarPt);
      
@@ -48,7 +50,7 @@ int main (void)
     while(!win)
     {
         //promptPlayer(discard, players[turn]);
-        /*
+        
      player selects card
         move card to played cards
         remove card from players hand
@@ -57,28 +59,14 @@ int main (void)
         if zero set win to true
      
      read card and determine next player and action
-         */
+         
         
-    //}
-
-    card deck[108];
-    char fileName[50];
-    printf("Enter file name:");
-    fgets(fileName, 50, stdin);
-    fileName[strlen(fileName) - 1] = '\0';
-    if(readDeck(deck, fileName))
-    {
-        for(int i = 0; i < 108; i++)
-        {
-            printf("%d%s ", deck[i].value, deck[i].color);
-        }
     }
+     */
+    
+    
+    
     /*
-     
-
-     void readDeck(card deck[], char fileName[]);
-
-     void startSeq(int *loadType, int*players, int*gameVar);
 
      void printHand(card head);
 

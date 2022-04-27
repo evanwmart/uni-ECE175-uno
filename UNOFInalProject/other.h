@@ -39,7 +39,6 @@ int promptPlayer(card head, card deck[]); // printTopCard(), printHand(), cardCo
 
 bool cardCheck(card cardPlayed, card base); //if(cardPlayed.value!=base.value)
 
-
 #endif /* other_h */
 
 /*
