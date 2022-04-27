@@ -253,17 +253,17 @@ int cardCount(card head)
 //input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
 void drawCard(card head, card deck[], int *cardsLeft)
 {
-    card instance = head;
-    while(instance.t != NULL)
+    card *instance = &head;
+    
+    while(instance->t != NULL)
     {
-        instance = *instance.t;
+        instance = instance->t;
     }
     
-    card drawnCard = deck[0];
-    
-    instance.t = &drawnCard;
-    drawnCard.h = &instance;
-    drawnCard.t = NULL;
+    card newCard;
+    instance->t = &newCard;
+    newCard.h = instance;
+    newCard.t = NULL;
     
     card *pt;
     for (int i = 0; i < *cardsLeft; i++)
