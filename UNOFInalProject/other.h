@@ -31,8 +31,7 @@ void printTopCard(card deck[]);
 
 int cardCount(card head);
 
-//use dynamic memory to create and free newC.
-void drawCard(card head, card deck[], card newC, int *cardsLeft);
+void drawCard(card head, card deck[], int *cardsLeft);
 
 void playCard(card head, int cardPos, int *numDiscard, card deck[]);
 
