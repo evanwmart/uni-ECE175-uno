@@ -4,7 +4,7 @@
 //
 //  Created by Evan Martin on 4/28/22.
 //
-
+/*
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -57,4 +57,4 @@ void addMember(person* *hl, person* *hr, person arr[], int i)
 //6:
 //7:
 //8:
-
+*/

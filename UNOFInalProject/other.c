@@ -281,51 +281,47 @@ void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
     }
 }
 
-void playCard(card* *head, card* *tail, int cardPos, int *cardsLeft, card deck[]) // moves the card from the players hand to the discard pile
+void playCard(card* *head, card* *tail, int cardPos, card deck[]) // moves the card from the players hand to the discard pile
 {
     card *pt = *head;
+    card *played;
     for (int i = 1; i <= cardPos; i++)
     {
         pt = pt->t;
     }
     if (pt == *head)
     {
+        played = pt;
         *head = pt->t;
         (pt->t)->h = pt->h;
     }
     else
     {
+        played = pt;
         (pt->h)->t = pt->t;
         (pt->t)->h = pt->h;
     }
     free(pt);
 
     card *disc = &deck[9];
+    disc = played;
     disc->t = NULL;
     disc->h = NULL;
 }
 
 int promptPlayer(card head, card deck[]){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
     
-    
     printTopCard(deck);
     printHand(head);
     
     int count = cardCount(head);
-    
     printf("Press 1-%d to play any card from your hand, or press zero to draw a card from the deck:\n", count);
     scanf("%d", &count);
-    
-    
-    
-    
-    
     
     return count;
 }
 
 bool cardCheck(card cardPlayed, card base){ //checks if the users selected card is a valid card to play
-    
     
     if((cardPlayed.value==base.value) || (cardPlayed.color==base.color)){
         return true;
@@ -333,5 +329,4 @@ bool cardCheck(card cardPlayed, card base){ //checks if the users selected card 
     else{
         return false;
     }
-
 }
