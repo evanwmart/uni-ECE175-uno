@@ -5,21 +5,38 @@
 //  Created by Evan Martin on 4/28/22.
 //
 
-/*
- typedef struct person_s {
-    char name[];
-    int age;
-    person.s *prev, *next;  //pointing to the previous and next person
- } person;
- 
- void addMember()
- {
- 
- }
- 
- 
- 
- */
-
-
 #include <stdio.h>
+#include <string.h>
+#include <stdio.h>
+
+typedef struct person_s {
+   char name[10];
+   int age;
+   struct person_s *prev, *next;  //pointing to the previous and next person
+} person;
+
+int main(void)
+{
+    person arr[10];
+    int i;
+    //initialize array
+    
+    person *headList1, *tailList1;
+    person *headList2, *tailList2;
+    headList1 = NULL;
+    headList2 = NULL;
+    
+    
+    
+    return 0;
+}
+
+void addMember(person* *hl, person* *hr, person arr[], int i)
+{
+    //create node
+    person *temp;
+    temp = (person*)malloc(sizeof(person));
+    
+    strcpy(temp->name, arr[i].name);
+    
+}
