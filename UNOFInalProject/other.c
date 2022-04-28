@@ -113,111 +113,110 @@ bool readDeck(card deck[], char fileName[])
 void printHand(card head)
 {
     card instance = head;
-    int count = 0;
-    while (instance.t != NULL)
+    if (instance.t != NULL)
     {
-        count++;
-        instance = *instance.t;
-    }
-    card array[count+1];
-    instance = *head.t;
-    for (int i = 0; i < count; i++)
-    {
-        array[i] = instance;
-        if(instance.t != NULL)
+        int count = 0;
+        while (instance.t != NULL)
         {
+            count++;
             instance = *instance.t;
         }
-    }
-    
-    printf("Player ");
+        card array[count+1];
+        instance = *head.t;
+        for (int i = 0; i < count; i++)
+        {
+            array[i] = instance;
+            if(instance.t != NULL)
+            {
+                instance = *instance.t;
+            }
+        }
+        printf("Player");
+        switch (head.value) {
+            case 1:
+                printf(" one");
+                break;
+            case 2:
+                printf(" two");
+                break;
+            case 3:
+                printf(" three");
+                break;
+            case 4:
+                printf(" four");
+                break;
+            case 5:
+                printf(" five");
+                break;
+            case 6:
+                printf(" six");
+                break;
+            case 7:
+                printf(" seven");
+                break;
+            case 8:
+                printf(" eight");
+                break;
+            case 9:
+                printf(" nine");
+                break;
+            case 10:
+                printf(" ten");
+                break;
+            default:
+                printf("");
+                break;
+        }
+        printf("'s hand:\n");
+        //1
+        for (int i = 0; i < count; i++)
+        {
+            printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
+        }
+        printf("\n");
+        
+        //2
+        for (int i = 0; i < count; i++)
+        {
+            printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
+        }
+        printf("\n");
+        
+        //3
+        for (int i = 0; i < count; i++)
+        {
+            printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
+        }
+        printf("\n");
 
-    switch (head.value) {
-        case 1:
-            printf("one");
-            break;
-        case 2:
-            printf("two");
-            break;
-        case 3:
-            printf("three");
-            break;
-        case 4:
-            printf("four");
-            break;
-        case 5:
-            printf("five");
-            break;
-        case 6:
-            printf("six");
-            break;
-        case 7:
-            printf("seven");
-            break;
-        case 8:
-            printf("eight");
-            break;
-        case 9:
-            printf("nine");
-            break;
-        case 10:
-            printf("ten");
-            break;
-        default:
-            printf("");
-            break;
+        //4
+        for (int i = 0; i < count; i++)
+        {
+            printf("⠿⠇-----⠸⠿\t");
+        }
+        printf("\n");
+        
+        //5
+        for (int i = 0; i < count; i++)
+        {
+            printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
+        }
+        printf("\n");
+        
+        //6
+        for (int i = 0; i < count; i++)
+        {
+            printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
+        }
+        printf("\n");
+        
+        //7
+        for (int i = 0; i < count; i++)
+        {
+            printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
+        }
+        printf("\n");
     }
-    
-    printf("'s hand:\n");
-    
-    //1
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
-    }
-    printf("\n");
-    
-    //2
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
-    }
-    printf("\n");
-    
-    //3
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
-    }
-    printf("\n");
-
-    //4
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠿⠇-----⠸⠿\t");
-    }
-    printf("\n");
-    
-    //5
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
-    }
-    printf("\n");
-    
-    //6
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
-    }
-    printf("\n");
-    
-    //7
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
-    }
-    printf("\n");
 }
 
 //function to print the last played card (top of discard pile)
@@ -256,16 +255,16 @@ void drawCard(card head, card deck[], int *cardsLeft)
     card *instance = &head;
     card *temp, *Pt;
     temp = (card *)malloc(sizeof(card));
-    
+    *temp = deck[0];
+    temp->t = NULL;
+
     while(instance->t != NULL)
     {
         instance = instance->t;
     }
     
-    instance->t = temp;
-    *temp = deck[0];
     temp->h = instance;
-    temp->t = NULL;
+    instance->t = temp;
     *cardsLeft -= 1;
     
     for (int i = 0; i < *cardsLeft; i++)
@@ -294,9 +293,9 @@ void playCard(card head, int cardPos, int *cardsLeft, card deck[]) // moves the 
     card *disc = &deck[9];
     *disc = *pt2;
     pt1->t = pt2->t;
+    free(pt2);
     disc->t = NULL;
     disc->h = NULL;
-    //free(pt2);
 }
 
 int promptPlayer(card head, card deck[]){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player

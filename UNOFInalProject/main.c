@@ -60,43 +60,37 @@ int main (void)
     }
      */
     card deck[10];
-    deck[0].value = 0;
-    strcpy(deck[0].color, "D");
-   
-    for(int i = 1; i < 10; i++)
+    card head;
+    head.value = 0;
+    head.color[0] = 'X';
+    head.color[1] = '\0';
+    head.t = NULL;
+    head.h = NULL;
+    
+    int cL = 10;
+    int *cpt = &cL;
+    
+    for(int i = 0; i < 10; i++)
     {
-        deck[i].value = i;
+        deck[i].value = i+1;
+        deck[i].color[0] = 'A' + i;
+        deck[i].color[1] = '\0';
     }
+    
+    for(int i = 0; i < 3; i++)
+    {
+        drawCard(head, deck, cpt);
+    }
+    
     for(int i = 1; i < 10; i++)
     {
         printf("%d - ", deck[i].value);
     }
     printf("\n");
-   
-    card head, one, two, three;
-    head.h = NULL;
-    head.t = &one;
-    head.value = 0;
-    strcpy(head.color, "X");
-    one.h = &head;
-    one.t = &two;
-    one.value = 1;
-    strcpy(one.color, "A");
-    two.h = &one;
-    two.t = &three;
-    two.value = 2;
-    strcpy(two.color, "B");
-    three.h = &two;
-    three.t = NULL;
-    three.value = 3;
-    strcpy(three.color, "C");
-   
+    
     printf("Before Play:\n");
     printHand(head);
    
-    int cL = 9;
-    int *cpt = &cL;
-    
     int num;
     printf("Select card: ");
     scanf("%d", &num);
