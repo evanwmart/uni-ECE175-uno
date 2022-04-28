@@ -16,7 +16,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "267"
             endingLineNumber = "267"
-            landmarkName = "drawCard(t, deck, cardsLeft)"
+            landmarkName = "drawCard(head, tail, deck)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -30,9 +30,9 @@
             filePath = "UNOFInalProject/other.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
-            landmarkName = "drawCard(t, deck, cardsLeft)"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "drawCard(head, tail, deck)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

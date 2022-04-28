@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct person_s {
    char name[10];
@@ -39,4 +39,22 @@ void addMember(person* *hl, person* *hr, person arr[], int i)
     
     strcpy(temp->name, arr[i].name);
     
+    //Check if list is empty
+    if (*hl == NULL)
+    {
+        
+    }
+    
 }
+
+//1: *hl = temp;
+//2: *hr = temp;
+//3: temp->previous = NULL;
+//4: temp->next = NULL;
+
+
+//5:
+//6:
+//7:
+//8:
+

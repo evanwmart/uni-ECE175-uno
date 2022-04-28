@@ -236,7 +236,7 @@ void printTopCard(card deck[])
 int cardCount(card head)
 {
     card instance = head;
-    int count = 0;
+    int count = 1;
     while(instance.t != NULL)
     {
         if (instance.t != NULL)
@@ -250,7 +250,7 @@ int cardCount(card head)
 
 //function to draw a card from the deck to a player's hand & then shift the unplayed cards down 1 in the deck array
 //input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
-void drawCard(card* t, card deck[], int *cardsLeft)
+void drawCard(card* *head, card* *tail, card deck[])
 {
     //Copy the data
     card *temp;
@@ -258,15 +258,19 @@ void drawCard(card* t, card deck[], int *cardsLeft)
     *temp = deck[0];
     temp->t = NULL;
     
-    //Set tail to point at the last card in the hand
-    card *tail = &(*t);
-    while (tail != NULL)
+    if (*head == NULL) //If empty
     {
-        tail = (tail->t);
+        *head = temp;
+        *tail = temp;
+        temp->t = NULL;
     }
-    
-    //Set the tail to point to the data
-    tail = temp;
+    else    //If not empty
+    {
+        tail.t = temp;
+        temp->h = *tail;
+        temp->t = NULL;
+    }
+    temp->t = NULL;
     
     //Shift cards in deck
     card *pt;
