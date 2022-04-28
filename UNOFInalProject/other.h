@@ -33,7 +33,7 @@ int cardCount(card head);
 
 void drawCard(card head, card deck[], int *cardsLeft);
 
-void playCard(card head, int cardPos, int *numDiscard, card deck[]);
+void playCard(card head, int cardPos, int *cardsLeft, card deck[]);
 
 int promptPlayer(card head, card deck[]); // printTopCard(), printHand(), cardCount() --- returns desired crd position to play
 

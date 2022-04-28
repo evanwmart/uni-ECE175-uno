@@ -91,21 +91,25 @@ int main (void)
     three.value = 3;
     strcpy(three.color, "C");
    
-    printf("Before Draw:\n");
+    printf("Before Play:\n");
     printHand(head);
    
-    int cL = 10;
+    int cL = 9;
     int *cpt = &cL;
-   
-    drawCard(head, deck, cpt);
-   
-    printf("After Draw:\n");
-    printHand(head);
+    
+    int num;
+    printf("Select card: ");
+    scanf("%d", &num);
+    
+    playCard(head, num, cpt, deck);
+    
     for(int i = 1; i < 10; i++)
     {
         printf("%d - ", deck[i].value);
     }
     printf("\n");
+    printf("After Play:\n");
+    printHand(head);
 
     
     /*

@@ -131,7 +131,7 @@ void printHand(card head)
     }
     
     printf("Player ");
-    
+
     switch (head.value) {
         case 1:
             printf("one");
@@ -284,21 +284,19 @@ void drawCard(card head, card deck[], int *cardsLeft)
 
 void playCard(card head, int cardPos, int *cardsLeft, card deck[]) // moves the card from the players hand to the discard pile
 {
-    card *instance = &head;
+    card *pt2 = &head;
+    card *pt1 = pt2;
     for (int i = 0; i < cardPos; i++)
     {
-        instance = instance->t;
+        pt1 = pt2;
+        pt2 = pt2->t;
     }
-    
-    card *pt;
-    for (int i = *cardsLeft; i < 107; i++)
-    {
-        pt = &deck[i];
-        *pt = deck[i + 1];
-    }
-    pt = &deck[107];
-    pt = instance;
-    free(instance);
+    card *disc = &deck[9];
+    *disc = *pt2;
+    pt1->t = pt2->t;
+    disc->t = NULL;
+    disc->h = NULL;
+    //free(pt2);
 }
 
 int promptPlayer(card head, card deck[]){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
