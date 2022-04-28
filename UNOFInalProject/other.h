@@ -31,7 +31,7 @@ void printTopCard(card deck[]);
 
 int cardCount(card head);
 
-void drawCard(card* t, card deck[], int *cardsLeft);
+void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft);
 
 void playCard(card head, int cardPos, int *cardsLeft, card deck[]);
 

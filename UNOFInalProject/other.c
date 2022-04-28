@@ -250,7 +250,7 @@ int cardCount(card head)
 
 //function to draw a card from the deck to a player's hand & then shift the unplayed cards down 1 in the deck array
 //input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
-void drawCard(card* *head, card* *tail, card deck[])
+void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
 {
     //Copy the data
     card *temp;
@@ -266,11 +266,11 @@ void drawCard(card* *head, card* *tail, card deck[])
     }
     else    //If not empty
     {
-        tail.t = temp;
+        (*tail)->t = temp;
         temp->h = *tail;
         temp->t = NULL;
+        *tail = temp;
     }
-    temp->t = NULL;
     
     //Shift cards in deck
     card *pt;
@@ -281,19 +281,26 @@ void drawCard(card* *head, card* *tail, card deck[])
     }
 }
 
-void playCard(card head, int cardPos, int *cardsLeft, card deck[]) // moves the card from the players hand to the discard pile
+void playCard(card* *head, card* *tail, int cardPos, int *cardsLeft, card deck[]) // moves the card from the players hand to the discard pile
 {
-    card *pt2 = &head;
-    card *pt1 = pt2;
-    for (int i = 0; i < cardPos; i++)
+    card *pt = *head;
+    for (int i = 1; i <= cardPos; i++)
     {
-        pt1 = pt2;
-        pt2 = pt2->t;
+        pt = pt->t;
     }
+    if (pt == *head)
+    {
+        *head = pt->t;
+        (pt->t)->h = pt->h;
+    }
+    else
+    {
+        (pt->h)->t = pt->t;
+        (pt->t)->h = pt->h;
+    }
+    free(pt);
+
     card *disc = &deck[9];
-    *disc = *pt2;
-    pt1->t = pt2->t;
-    free(pt2);
     disc->t = NULL;
     disc->h = NULL;
 }
