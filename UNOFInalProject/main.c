@@ -66,10 +66,8 @@ int main (void)
     head.color[1] = '\0';
     head.t = NULL;
     head.h = NULL;
-    
     int cL = 10;
     int *cpt = &cL;
-    
     for(int i = 0; i < 10; i++)
     {
         deck[i].value = i+1;
@@ -79,30 +77,14 @@ int main (void)
     
     for(int i = 0; i < 3; i++)
     {
-        drawCard(head, deck, cpt);
+        drawCard(head.t, deck, cpt);
+        
+        
+        printf("-\n");
+        
     }
     
-    for(int i = 1; i < 10; i++)
-    {
-        printf("%d - ", deck[i].value);
-    }
-    printf("\n");
     
-    printf("Before Play:\n");
-    printHand(head);
-   
-    int num;
-    printf("Select card: ");
-    scanf("%d", &num);
-    
-    playCard(head, num, cpt, deck);
-    
-    for(int i = 1; i < 10; i++)
-    {
-        printf("%d - ", deck[i].value);
-    }
-    printf("\n");
-    printf("After Play:\n");
     printHand(head);
 
     

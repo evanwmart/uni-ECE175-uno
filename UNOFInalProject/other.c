@@ -250,34 +250,30 @@ int cardCount(card head)
 
 //function to draw a card from the deck to a player's hand & then shift the unplayed cards down 1 in the deck array
 //input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
-void drawCard(card head, card deck[], int *cardsLeft)
+void drawCard(card* t, card deck[], int *cardsLeft)
 {
-    card *instance = &head;
-    card *temp, *Pt;
+    //Copy the data
+    card *temp;
     temp = (card *)malloc(sizeof(card));
     *temp = deck[0];
     temp->t = NULL;
-
-    while(instance->t != NULL)
+    
+    //Set tail to point at the last card in the hand
+    card *tail = &(*t);
+    while (tail != NULL)
     {
-        instance = instance->t;
+        tail = (tail->t);
     }
     
-    temp->h = instance;
-    instance->t = temp;
-    *cardsLeft -= 1;
+    //Set the tail to point to the data
+    tail = temp;
     
+    //Shift cards in deck
+    card *pt;
     for (int i = 0; i < *cardsLeft; i++)
     {
-        Pt = &deck[i];
-        *Pt = deck[i+1];
-        if(i == *cardsLeft - 1)
-        {
-            Pt = &deck[i+1];
-            Pt->value = -1;
-            Pt->h = NULL;
-            Pt->t = NULL;
-        }
+        pt = &deck[i];
+        *pt = deck[i + 1];
     }
 }
 
