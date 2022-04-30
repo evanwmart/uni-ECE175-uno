@@ -336,7 +336,7 @@ bool cardCheck(card cardPlayed, card base){ //checks if the users selected card 
     }
 }
 
-card getCard(card* *head, int pos){ //returns the card that the player last played 
+card getCard(card* *head, int pos){ //returns the card that the player last played
     card *temp=*head;
     for(int i=0; i<pos; i++){
         temp=temp->h;
