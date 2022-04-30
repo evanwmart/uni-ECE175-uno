@@ -35,7 +35,7 @@ void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft);
 
 void playCard(card* *head, card* *tail, int cardPos, card deck[]);
 
-int promptPlayer(card head, card deck[]); // printTopCard(), printHand(), cardCount() --- returns desired crd position to play
+int promptPlayer(card* *head, card deck[], int playerNum); // printTopCard(), printHand(), cardCount() --- returns desired crd position to play
 
 bool cardCheck(card cardPlayed, card base); //if(cardPlayed.value!=base.value)
 
