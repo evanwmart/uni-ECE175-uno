@@ -123,7 +123,7 @@ void printHand(card* *head, int playerNum)
         }
         card array[count+1];
         instance = *head;
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i <= count; i++)
         {
             array[i] = *instance;
             if(instance->t != NULL)
@@ -169,49 +169,49 @@ void printHand(card* *head, int playerNum)
         }
         printf("'s hand:\n");
         //1
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i <= count; i++)
         {
             printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
         }
         printf("\n");
         
         //2
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i <= count; i++)
         {
             printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
         }
         printf("\n");
         
         //3
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i <= count; i++)
         {
             printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
         }
         printf("\n");
 
         //4
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i <= count; i++)
         {
             printf("⠿⠇-----⠸⠿\t");
         }
         printf("\n");
         
         //5
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i <= count; i++)
         {
             printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
         }
         printf("\n");
         
         //6
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i <= count; i++)
         {
             printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
         }
         printf("\n");
         
         //7
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i <= count; i++)
         {
             printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
         }
@@ -233,15 +233,15 @@ void printTopCard(card deck[])
     printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁ \n");
 }
 
-int cardCount(card head)
+int cardCount(card* *head)
 {
-    card instance = head;
-    int count = 1;
-    while(instance.t != NULL)
+    card *instance = *head;
+    int count = 0;
+    while(instance->t != NULL)
     {
-        if (instance.t != NULL)
+        if (instance->t != NULL)
         {
-            instance = *instance.t;
+            instance = instance->t;
             count++;
         }
     }
@@ -312,7 +312,7 @@ void playCard(card* *head, card* *tail, int cardPos, card deck[]) // moves the c
 int promptPlayer(card head, card deck[]){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
     
     printTopCard(deck);
-    printHand(head);
+    //printHand(head);
     
     int count = cardCount(head);
     printf("Press 1-%d to play any card from your hand, or press zero to draw a card from the deck:\n", count);

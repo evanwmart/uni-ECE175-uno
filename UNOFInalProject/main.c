@@ -81,8 +81,8 @@ int main (void)
         printf("-\n");
     }
     
-    //printHand(p1H);
-
+    printHand(&p1H, 1);
+    
     /*
 
      int cardCount(card head);
