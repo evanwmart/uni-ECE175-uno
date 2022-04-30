@@ -53,6 +53,7 @@ int main (void)
         {
             //Ask player to select card and stor selected card integer
             int c = promptPlayer(&playersH[pturn], deck, pturn);
+            //check that prompt player is within the players hand
         
             //getCard() !!NEED TO DO return cardPlayed
         
