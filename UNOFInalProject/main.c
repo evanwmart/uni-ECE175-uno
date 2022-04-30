@@ -59,7 +59,7 @@ int main (void)
      read card and determine next player and action
     }
      */
-    card deck[10];
+    card deck[108];
     card *p1H;
     card *p1T;
     p1H = NULL;
@@ -67,22 +67,22 @@ int main (void)
     
     int cL = 10;
     int *cpt = &cL;
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < 108; i++)
     {
         deck[i].value = i+1;
-        deck[i].color[0] = 'A' + i;
+        deck[i].color[0] = 'A';
         deck[i].color[1] = '\0';
     }
     
     for(int i = 0; i < 3; i++)
     {
         drawCard(&p1H, &p1T, deck, cpt);
-        
         printf("-\n");
     }
     
-    printHand(&p1H, 1);
     printf("%d\n", cardCount(&p1H));
+    
+    printf("%d\n", promptPlayer(&p1H, deck));
     
     /*
 
