@@ -29,7 +29,7 @@ void printHand(card* *head, int playerNum);
 
 void printTopCard(card deck[]);
 
-int cardCount(card head);
+int cardCount(card* *head);
 
 void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft);
 
