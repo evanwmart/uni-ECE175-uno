@@ -15,7 +15,6 @@
 int main (void)
 {
     
-    /*
     int loadType = 0, numPlayers = 0, gameVar = 0, cardsLeft = 108;
     int* loadPt = &loadType;
     int* playersPt = &numPlayers;
@@ -25,64 +24,52 @@ int main (void)
     
     startSeq(loadPt, playersPt, gameVarPt);
      
-    card *player;
-    player = (card*)calloc(numPlayers, sizeof(card));
+    card * playersH[numPlayers];
+    card * playersT[numPlayers];
+    
     for (int i = 0; i < numPlayers; i++)
     {
-        player[i].value = i+1;
-        player[i].h = NULL;
-        player[i].t = NULL;
+        playersH[i] = NULL;
+        playersT[i] = NULL;
     }
-    
     for(int i = 0; i < 7; i++)
     {
         for (int j = 0; j < numPlayers; j++)
         {
-            drawCard(player[i], deck, numCards);
+            drawCard(&playersH[i], &playersT[i], deck, numCards);
         }
     }
     
-    bool win = false;
-    //int pturn = 0;
-    //int pdirection = 1;
-    while(!win)
+    //unprompted - draw a card to player hand and play it so that discard pile has a card.
+    
+    bool win = false;       //track wether game should continue
+    int pturn = 0;          //track whose turn it is
+    int pdirection = 1;     //the increment for direction of play (turn
+    while(!win)             //check for if game is over
     {
-        //promptPlayer(discard, players[turn]);
         
-     player selects card
-        move card to played cards
-        remove card from players hand
-     
-     check players hand amount
-        if zero set win to true
-     
-     read card and determine next player and action
+        bool canPlay = false;
+        while (!canPlay)
+        {
+            //Ask player to select card and stor selected card integer
+            int c = promptPlayer(&playersH[pturn], deck, pturn);
+        
+            //getCard() !!NEED TO DO return cardPlayed
+        
+            if( cardCheck(<#card cardPlayed#>, deck[107]) )
+            {
+                playCard(<#card **head#>, <#card **tail#>, <#int cardPos#>, <#card *deck#>);
+                canPlay = true;
+            }
+            else
+            {
+                printf("The %d%s cannot be placed on top of %d%s\n", cardPlayed.value, cardPlayed.color, deck[107].value, deck[107].color);     //FIX: cardPlayed
+            }
+            
+        }
+        
+        
     }
-     */
-    card deck[108];
-    card *p1H;
-    card *p1T;
-    p1H = NULL;
-    p1T = NULL;
-    
-    int cL = 10;
-    int *cpt = &cL;
-    for(int i = 0; i < 108; i++)
-    {
-        deck[i].value = i+1;
-        deck[i].color[0] = 'A';
-        deck[i].color[1] = '\0';
-    }
-    
-    for(int i = 0; i < 3; i++)
-    {
-        drawCard(&p1H, &p1T, deck, cpt);
-        printf("-\n");
-    }
-    
-    printf("%d\n", cardCount(&p1H));
-    
-    printf("%d\n", promptPlayer(&p1H, deck, 1));
     
     return 0;
 }
