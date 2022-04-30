@@ -336,11 +336,12 @@ bool cardCheck(card cardPlayed, card base){ //checks if the users selected card 
     }
 }
 
-card getCard(card* *head, int pos){
+card getCard(card* *head, int pos){ //returns the card that the player last played 
+    card *temp=*head;
+    for(int i=0; i<pos; i++){
+        temp=temp->h;
+        
+    }
     
-    //for loop for tail pointer != null
-    
-    //return the card at pos
-    
-    return selectedCard;
+    return *temp;
 }
