@@ -110,29 +110,29 @@ bool readDeck(card deck[], char fileName[])
 
 //function to print a players hand
 //input: the initial "head" card in the respective player's linked list
-void printHand(card head)
+void printHand(card* *head, int playerNum)
 {
-    card instance = head;
-    if (instance.t != NULL)
+    card *instance = *head;
+    if (instance->t != NULL)
     {
         int count = 0;
-        while (instance.t != NULL)
+        while (instance->t != NULL)
         {
             count++;
-            instance = *instance.t;
+            instance = instance->t;
         }
         card array[count+1];
-        instance = *head.t;
+        instance = *head;
         for (int i = 0; i < count; i++)
         {
-            array[i] = instance;
-            if(instance.t != NULL)
+            array[i] = *instance;
+            if(instance->t != NULL)
             {
-                instance = *instance.t;
+                instance = instance->t;
             }
         }
         printf("Player");
-        switch (head.value) {
+        switch (playerNum) {
             case 1:
                 printf(" one");
                 break;

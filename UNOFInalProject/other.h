@@ -25,7 +25,7 @@ bool readDeck(card deck[], char fileName[]);
 
 void startSeq(int *loadType, int*players, int*gameVar);
 
-void printHand(card head);
+void printHand(card* *head, int playerNum);
 
 void printTopCard(card deck[]);
 

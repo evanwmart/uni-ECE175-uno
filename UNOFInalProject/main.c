@@ -60,12 +60,11 @@ int main (void)
     }
      */
     card deck[10];
-    card head;
-    head.value = 0;
-    head.color[0] = 'X';
-    head.color[1] = '\0';
-    head.t = NULL;
-    head.h = NULL;
+    card *p1H;
+    card *p1T;
+    p1H = NULL;
+    p1T = NULL;
+    
     int cL = 10;
     int *cpt = &cL;
     for(int i = 0; i < 10; i++)
@@ -77,17 +76,13 @@ int main (void)
     
     for(int i = 0; i < 3; i++)
     {
-        drawCard(head.t, deck, cpt);
-        
+        drawCard(&p1H, &p1T, deck, cpt);
         
         printf("-\n");
-        
     }
     
-    
-    printHand(head);
+    //printHand(p1H);
 
-    
     /*
 
      int cardCount(card head);
