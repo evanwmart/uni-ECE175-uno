@@ -82,20 +82,7 @@ int main (void)
     
     printf("%d\n", cardCount(&p1H));
     
-    printf("%d\n", promptPlayer(&p1H, deck));
-    
-    /*
-
-     int cardCount(card head);
-
-     void drawCard(card head, card deck[], int *cardsLeft);
-
-     void playCard(card head, int cardPos, int *numDiscard, card deck[]);
-
-     int promptPlayer(card head, card deck[]);
-
-     bool cardCheck(card cardPlayed, card base);
-     */
+    printf("%d\n", promptPlayer(&p1H, deck, 1));
     
     return 0;
 }
