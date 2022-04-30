@@ -83,6 +83,10 @@ int main (void)
     
     printHand(&p1H, 1);
     
+    while(numCards!=0){
+        
+        
+    }
     /*
 
      int cardCount(card head);
