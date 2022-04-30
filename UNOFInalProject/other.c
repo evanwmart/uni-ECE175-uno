@@ -342,6 +342,5 @@ card getCard(card* *head, int pos){ //returns the card that the player last play
         temp=temp->h;
         
     }
-    
     return *temp;
 }
