@@ -82,6 +82,7 @@ int main (void)
     }
     
     printHand(&p1H, 1);
+    printf("%d\n", cardCount(&p1H));
     
     /*
 

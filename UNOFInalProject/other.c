@@ -237,9 +237,13 @@ int cardCount(card* *head)
 {
     card *instance = *head;
     int count = 0;
-    while(instance->t != NULL)
+    if (instance->t == NULL)
     {
-        if (instance->t != NULL)
+        return 0;
+    }
+    else
+    {
+        while(instance->t != NULL)
         {
             instance = instance->t;
             count++;
@@ -314,7 +318,8 @@ int promptPlayer(card head, card deck[]){ //prompts the player which card they w
     printTopCard(deck);
     //printHand(head);
     
-    int count = cardCount(head);
+    int count = 0;
+    //= cardCount(head);
     printf("Press 1-%d to play any card from your hand, or press zero to draw a card from the deck:\n", count);
     scanf("%d", &count);
     
