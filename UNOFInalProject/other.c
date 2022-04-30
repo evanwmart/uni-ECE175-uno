@@ -110,114 +110,113 @@ bool readDeck(card deck[], char fileName[])
 
 //function to print a players hand
 //input: the initial "head" card in the respective player's linked list
-void printHand(card head)
+void printHand(card* *head, int playerNum)
 {
-    card instance = head;
-    int count = 0;
-    while (instance.t != NULL)
+    card *instance = *head;
+    if (instance->t != NULL)
     {
-        count++;
-        instance = *instance.t;
-    }
-    card array[count+1];
-    instance = *head.t;
-    for (int i = 0; i < count; i++)
-    {
-        array[i] = instance;
-        if(instance.t != NULL)
+        int count = 0;
+        while (instance->t != NULL)
         {
-            instance = *instance.t;
+            count++;
+            instance = instance->t;
         }
-    }
-    
-    printf("Player ");
-    
-    switch (head.value) {
-        case 1:
-            printf("one");
-            break;
-        case 2:
-            printf("two");
-            break;
-        case 3:
-            printf("three");
-            break;
-        case 4:
-            printf("four");
-            break;
-        case 5:
-            printf("five");
-            break;
-        case 6:
-            printf("six");
-            break;
-        case 7:
-            printf("seven");
-            break;
-        case 8:
-            printf("eight");
-            break;
-        case 9:
-            printf("nine");
-            break;
-        case 10:
-            printf("ten");
-            break;
-        default:
-            printf("");
-            break;
-    }
-    
-    printf("'s hand:\n");
-    
-    //1
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
-    }
-    printf("\n");
-    
-    //2
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
-    }
-    printf("\n");
-    
-    //3
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
-    }
-    printf("\n");
+        card array[count+1];
+        instance = *head;
+        for (int i = 0; i <= count; i++)
+        {
+            array[i] = *instance;
+            if(instance->t != NULL)
+            {
+                instance = instance->t;
+            }
+        }
+        printf("Player");
+        switch (playerNum) {
+            case 1:
+                printf(" one");
+                break;
+            case 2:
+                printf(" two");
+                break;
+            case 3:
+                printf(" three");
+                break;
+            case 4:
+                printf(" four");
+                break;
+            case 5:
+                printf(" five");
+                break;
+            case 6:
+                printf(" six");
+                break;
+            case 7:
+                printf(" seven");
+                break;
+            case 8:
+                printf(" eight");
+                break;
+            case 9:
+                printf(" nine");
+                break;
+            case 10:
+                printf(" ten");
+                break;
+            default:
+                printf("");
+                break;
+        }
+        printf("'s hand:\n");
+        //1
+        for (int i = 0; i <= count; i++)
+        {
+            printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
+        }
+        printf("\n");
+        
+        //2
+        for (int i = 0; i <= count; i++)
+        {
+            printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
+        }
+        printf("\n");
+        
+        //3
+        for (int i = 0; i <= count; i++)
+        {
+            printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
+        }
+        printf("\n");
 
-    //4
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠿⠇-----⠸⠿\t");
+        //4
+        for (int i = 0; i <= count; i++)
+        {
+            printf("⠿⠇-----⠸⠿\t");
+        }
+        printf("\n");
+        
+        //5
+        for (int i = 0; i <= count; i++)
+        {
+            printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
+        }
+        printf("\n");
+        
+        //6
+        for (int i = 0; i <= count; i++)
+        {
+            printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
+        }
+        printf("\n");
+        
+        //7
+        for (int i = 0; i <= count; i++)
+        {
+            printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
+        }
+        printf("\n");
     }
-    printf("\n");
-    
-    //5
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
-    }
-    printf("\n");
-    
-    //6
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
-    }
-    printf("\n");
-    
-    //7
-    for (int i = 0; i < count; i++)
-    {
-        printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
-    }
-    printf("\n");
 }
 
 //function to print the last played card (top of discard pile)
@@ -234,15 +233,15 @@ void printTopCard(card deck[])
     printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁ \n");
 }
 
-int cardCount(card head)
+int cardCount(card* *head)
 {
-    card instance = head;
+    card *instance = *head;
     int count = 0;
-    while(instance.t != NULL)
+    while(instance->t != NULL)
     {
-        if (instance.t != NULL)
+        if (instance->t != NULL)
         {
-            instance = *instance.t;
+            instance = instance->t;
             count++;
         }
     }
@@ -251,70 +250,78 @@ int cardCount(card head)
 
 //function to draw a card from the deck to a player's hand & then shift the unplayed cards down 1 in the deck array
 //input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
-void drawCard(card head, card deck[], int *cardsLeft)
+void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
 {
-    card *instance = &head;
-    card *temp, *Pt;
+    //Copy the data
+    card *temp;
     temp = (card *)malloc(sizeof(card));
-    
-    while(instance->t != NULL)
-    {
-        instance = instance->t;
-    }
-    
-    instance->t = temp;
     *temp = deck[0];
-    temp->h = instance;
     temp->t = NULL;
-    *cardsLeft -= 1;
     
-    for (int i = 0; i < *cardsLeft; i++)
+    if (*head == NULL) //If empty
     {
-        Pt = &deck[i];
-        *Pt = deck[i+1];
-        if(i == *cardsLeft - 1)
-        {
-            Pt = &deck[i+1];
-            Pt->value = -1;
-            Pt->h = NULL;
-            Pt->t = NULL;
-        }
+        *head = temp;
+        *tail = temp;
+        temp->t = NULL;
     }
-}
-
-void playCard(card head, int cardPos, int *cardsLeft, card deck[]) // moves the card from the players hand to the discard pile
-{
-    card *instance = &head;
-    for (int i = 0; i < cardPos; i++)
+    else    //If not empty
     {
-        instance = instance->t;
+        (*tail)->t = temp;
+        temp->h = *tail;
+        temp->t = NULL;
+        *tail = temp;
     }
     
+    //Shift cards in deck
     card *pt;
-    for (int i = *cardsLeft; i < 107; i++)
+    for (int i = 0; i < *cardsLeft; i++)
     {
         pt = &deck[i];
         *pt = deck[i + 1];
     }
-    pt = &deck[107];
-    pt = instance;
-    free(instance);
+}
+
+void playCard(card* *head, card* *tail, int cardPos, card deck[]) // moves the card from the players hand to the discard pile
+{
+    card *pt = *head;
+    card *played;
+    for (int i = 1; i <= cardPos; i++)
+    {
+        pt = pt->t;
+    }
+    if (pt == *head)
+    {
+        played = pt;
+        *head = pt->t;
+        (pt->t)->h = pt->h;
+    }
+    else
+    {
+        played = pt;
+        (pt->h)->t = pt->t;
+        (pt->t)->h = pt->h;
+    }
+    free(pt);
+
+    card *disc = &deck[9];
+    disc = played;
+    disc->t = NULL;
+    disc->h = NULL;
 }
 
 int promptPlayer(card head, card deck[]){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
     
     printTopCard(deck);
-    printHand(head);
+    //printHand(head);
     
     int count = cardCount(head);
-    
     printf("Press 1-%d to play any card from your hand, or press zero to draw a card from the deck:\n", count);
     scanf("%d", &count);
     
     return count;
 }
 
-bool cardCheck(card cardPlayed, card base){ //checks if the users selected card is a valid card to play by verifying that either the card played number is equal to the base card number or if the color of the card played is the same as the color of the base card
+bool cardCheck(card cardPlayed, card base){ //checks if the users selected card is a valid card to play
     
     if((cardPlayed.value==base.value) || (cardPlayed.color==base.color)){
         return true;

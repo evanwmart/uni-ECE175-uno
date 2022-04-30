@@ -25,15 +25,15 @@ bool readDeck(card deck[], char fileName[]);
 
 void startSeq(int *loadType, int*players, int*gameVar);
 
-void printHand(card head);
+void printHand(card* *head, int playerNum);
 
 void printTopCard(card deck[]);
 
-int cardCount(card head);
+int cardCount(card* *head);
 
-void drawCard(card head, card deck[], int *cardsLeft);
+void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft);
 
-void playCard(card head, int cardPos, int *numDiscard, card deck[]);
+void playCard(card* *head, card* *tail, int cardPos, card deck[]);
 
 int promptPlayer(card head, card deck[]); // printTopCard(), printHand(), cardCount() --- returns desired crd position to play
 
