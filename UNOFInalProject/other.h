@@ -39,6 +39,8 @@ int promptPlayer(card* *head, card deck[], int playerNum); // printTopCard(), pr
 
 bool cardCheck(card cardPlayed, card base); //if(cardPlayed.value!=base.value)
 
+card getCard(card* *head, int pos);
+
 #endif /* other_h */
 
 /*
