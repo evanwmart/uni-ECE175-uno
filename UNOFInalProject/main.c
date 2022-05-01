@@ -14,16 +14,35 @@
 
 int main (void)
 {
-    
     int loadType = 0, numPlayers = 0, gameVar = 0, cardsLeft = 108;
     int* loadPt = &loadType;
     int* playersPt = &numPlayers;
     int* gameVarPt = &gameVar;
-    int *numCards = &cardsLeft;
+    int* numCards = &cardsLeft;
     card deck[108];
     readDeck(deck, "deck.txt");
     
     startSeq(loadPt, playersPt, gameVarPt);
+    
+    if (loadType == 1)
+    {
+        shuffle(deck, 108);
+    }
+    else
+    {
+        char fileName[30];
+        printf("Please enter the file name to load a deck:");
+        scanf("%s", fileName);
+        if (!readDeck(deck, fileName))
+        {
+            printf("Error reading from file: %s\nPlease restart program.\n", fileName);
+            return -1;
+        }
+        else
+        {
+            readDeck(deck, fileName);
+        }
+    }
      
     card * playersH[numPlayers];
     card * playersT[numPlayers];
@@ -41,44 +60,88 @@ int main (void)
         }
     }
     
-    drawCard(&playersH[0], &playersT[0], deck, numCards);
-    playCard(&playersH[0], &playersT[0], 8, deck);  // !MAKE SURE THE DISCARD PILE HAS THE PLAYED CARD!!
+    drawCard(&playersH[0], &playersT[0], deck, numCards);       //draw another card and put it into discard pile
+    playCard(&playersH[0], &playersT[0], 8, deck, numCards);
     
     bool win = false;       //track wether game should continue
     int pturn = 0;          //track whose turn it is
     int pdirection = 1;     //the increment for direction of play (turn
+    
     while(!win)             //check for if game is over
     {
         bool canPlay = false;
         while (!canPlay)
         {
-            int c = -1;
-            while( c <= 0 || c > cardCount(&playersH[pturn]) )
+            int pos = -1;
+            while( pos <= 0 || pos > cardCount(&playersH[pturn]) )
             {
                 
-                //Ask player to select card and stor selected card integer
-                c = promptPlayer(&playersH[pturn], deck, pturn);
-                //check that prompt player is within the players hand
-                if (c <= 0 || c > cardCount(&playersH[pturn]))
+                //Ask player to select card and store selected card's position in pos
+                pos = promptPlayer(&playersH[pturn], deck, pturn);
+                
+                //check that desired position is within the player's hand range
+                if (pos <= 0 || pos > cardCount(&playersH[pturn]))
                 {
-                    printf("Please eneter a valid card number.\n");
+                    printf("Please enter a valid card number.\n");
                 }
             }
-        
-            card cardPlayed = getCard(&playersH[pturn], c);
-        
+            
+            //store card played
+            card cardPlayed = getCard(&playersH[pturn], pos);
+            
+            //check if the card chosen to play is valid to play
             if( cardCheck(cardPlayed, deck[107]) )
             {
-                playCard(&playersH[pturn], &playersT[pturn], c, deck);
+                //if valid, play card
+                playCard(&playersH[pturn], &playersT[pturn], pos, deck, numCards);
                 canPlay = true;
             }
+            //if invalid, do not play card
             else
             {
                 printf("The %d%s cannot be placed on top of %d%s\n", cardPlayed.value, cardPlayed.color, deck[107].value, deck[107].color);
+                canPlay = false;
             }
             
+            if (canPlay)
+            {
+                switch (deck[107].value) {
+                    case 10:    //skip card
+                        pturn += (pdirection * 2);
+                        break;
+                        
+                    case 11:    //reverse card
+                        pdirection = pdirection * -1;
+                        pturn += pdirection;
+                        break;
+                    
+                    case 12:    //pickup 2 card
+                        pturn += pdirection;
+                        //pick up two for next player
+                        break;
+                        
+                    case 13:    //wild card
+                        pturn += pdirection;
+                        //prompt to change color "colorChange()"
+                        break;
+                        
+                    case 14:    //pickup 4 card
+                        pturn += pdirection;
+                        //pick up 4 for next player
+                        //prompt to change color "colorChange()"
+                        break;
+                        
+                    default:
+                        pturn += pdirection;
+                        break;
+                }
+            }
             
+            //count player's hand if zero then win sequence, if one then say uno
         }
+        
+        
+        
         
         
     }

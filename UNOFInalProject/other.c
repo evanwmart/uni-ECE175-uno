@@ -290,10 +290,9 @@ void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
     cardsLeft--;
 }
 
-void playCard(card* *head, card* *tail, int cardPos, card deck[]) // moves the card from the players hand to the discard pile
+void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft) // moves the card from the players hand to the discard pile
 {
     card *pt = *head;
-    
     
     card *played;
     for (int i = 1; i < cardPos; i++)
@@ -319,11 +318,19 @@ void playCard(card* *head, card* *tail, int cardPos, card deck[]) // moves the c
         (pt->t)->h = pt->h;
     }
     free(pt);
-
-    card *disc = &deck[9];
-    disc = played;
+    
+    card *disc;
+    for(int i = *cardsLeft + 1; i < 107; i++)
+    {
+        disc = &deck[i];
+        *disc = deck[i+1];
+    }
+    
+    disc = &deck[107];
+    *disc = *played;
     disc->t = NULL;
     disc->h = NULL;
+    
 }
 
 int promptPlayer(card* *head, card deck[], int playerNum){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
@@ -340,17 +347,19 @@ int promptPlayer(card* *head, card deck[], int playerNum){ //prompts the player 
 
 bool cardCheck(card cardPlayed, card base){ //checks if the users selected card is a valid card to play
     
-    if((cardPlayed.value==base.value) || (cardPlayed.color==base.color)){
+    if((cardPlayed.value == base.value) || strcmp(cardPlayed.color, base.color) == 0){
         return true;
     }
     else{
         return false;
     }
+    
 }
 
 card getCard(card* *head, int pos){ //returns the card that the player last played
     card *temp = *head;
-    for(int i = 0; i < pos; i++){
+    for(int i = 1; i < pos; i++)
+    {
         temp = temp->t;
     }
     return *temp;
