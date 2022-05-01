@@ -192,7 +192,7 @@ void printHand(card* *head, int playerNum)
         //4
         for (int i = 0; i <= count; i++)
         {
-            printf("⠿⠇-----⠸⠿\t");
+            printf("⠿⠇ %2d  ⠸⠿\t", array[i].value);
         }
         printf("\n");
         
@@ -227,7 +227,7 @@ void printTopCard(card deck[])
     printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄ \n");
     printf("⠯ %s ⠽⠿⠿⠿⠿\n", deck[107].color);
     printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇ \n");
-    printf("⠿⠇-%2d--⠸⠿\n", deck[107].value);
+    printf("⠿⠇ %2d  ⠸⠿\n", deck[107].value);
     printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇ \n");
     printf("⠿⠿⠿⠿⠯ %s ⠽\n", deck[107].color);
     printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁ \n");
@@ -261,21 +261,22 @@ void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
     card *temp;
     temp = (card *)malloc(sizeof(card));
     *temp = deck[0];
-    temp->t = NULL;
     
     if (*head == NULL) //If empty
     {
         *head = temp;
         *tail = temp;
         temp->t = NULL;
+        temp->h = NULL;
     }
-    else    //If not empty
+    else
     {
         (*tail)->t = temp;
         temp->h = *tail;
-        temp->t = NULL;
         *tail = temp;
+        temp->t = NULL;
     }
+    
     
     //Shift cards in deck
     card *pt;
@@ -284,13 +285,18 @@ void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
         pt = &deck[i];
         *pt = deck[i + 1];
     }
+    
+    //Decrease count of playable cards in deck
+    cardsLeft--;
 }
 
 void playCard(card* *head, card* *tail, int cardPos, card deck[]) // moves the card from the players hand to the discard pile
 {
     card *pt = *head;
+    
+    
     card *played;
-    for (int i = 1; i <= cardPos; i++)
+    for (int i = 1; i < cardPos; i++)
     {
         pt = pt->t;
     }
@@ -299,6 +305,12 @@ void playCard(card* *head, card* *tail, int cardPos, card deck[]) // moves the c
         played = pt;
         *head = pt->t;
         (pt->t)->h = pt->h;
+    }
+    else if (pt == *tail)
+    {
+        played = pt;
+        *tail = (*tail)->h;
+        (*tail)->t = NULL;
     }
     else
     {
@@ -337,10 +349,9 @@ bool cardCheck(card cardPlayed, card base){ //checks if the users selected card 
 }
 
 card getCard(card* *head, int pos){ //returns the card that the player last played
-    card *temp=*head;
-    for(int i=0; i<pos; i++){
-        temp=temp->h;
-        
+    card *temp = *head;
+    for(int i = 0; i < pos; i++){
+        temp = temp->t;
     }
     return *temp;
 }
