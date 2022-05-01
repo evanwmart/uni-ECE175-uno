@@ -74,6 +74,45 @@ int main (void)
         //determine which player's turn
         pturn = pturn % numPlayers;
         
+        printf("\n\n\n\n");
+        printf("Player");
+        switch (pturn) {
+            case 0:
+                printf(" one");
+                break;
+            case 1:
+                printf(" two");
+                break;
+            case 2:
+                printf(" three");
+                break;
+            case 3:
+                printf(" four");
+                break;
+            case 4:
+                printf(" five");
+                break;
+            case 5:
+                printf(" six");
+                break;
+            case 6:
+                printf(" seven");
+                break;
+            case 7:
+                printf(" eight");
+                break;
+            case 8:
+                printf(" nine");
+                break;
+            case 9:
+                printf(" ten");
+                break;
+            default:
+                printf("");
+                break;
+        }
+        printf("'s turn!\n");
+        
         while (!canPlay)
         {
             int pos = -1;
