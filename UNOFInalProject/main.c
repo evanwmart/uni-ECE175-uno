@@ -74,7 +74,7 @@ int main (void)
         //determine which player's turn
         pturn = pturn % numPlayers;
         
-        printf("\n\n\n\n");
+        printf("\n\n\n\n\n\n\n\n");
         printf("Player");
         switch (pturn) {
             case 0:
@@ -127,6 +127,7 @@ int main (void)
                 {
                     printf("Please enter a valid card number.\n");
                 }
+                
             }
             
             //store card played
