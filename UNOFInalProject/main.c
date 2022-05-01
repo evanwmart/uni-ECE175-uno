@@ -31,7 +31,7 @@ int main (void)
     else
     {
         char fileName[30];
-        printf("Please enter the file name to load a deck:");
+        printf("Please enter the file name to load a deck: ");
         scanf("%s", fileName);
         if (!readDeck(deck, fileName))
         {
