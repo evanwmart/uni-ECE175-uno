@@ -130,22 +130,26 @@ int main (void)
                 
             }
             
-            //store card played
-            card cardPlayed = getCard(&playersH[pturn], pos);
-            
-            //check if the card chosen to play is valid to play
-            if( cardCheck(cardPlayed, deck[107]) )
+            if (pos > 0)
             {
-                //if valid, play card
-                playCard(&playersH[pturn], &playersT[pturn], pos, deck, numCards);
-                canPlay = true;
+                //store card played
+                card cardPlayed = getCard(&playersH[pturn], pos);
+                
+                //check if the card chosen to play is valid to play
+                if( cardCheck(cardPlayed, deck[107]) )
+                {
+                    //if valid, play card
+                    playCard(&playersH[pturn], &playersT[pturn], pos, deck, numCards);
+                    canPlay = true;
+                }
+                //if invalid, do not play card
+                else
+                {
+                    printf("The %d%s cannot be placed on top of %d%s\n", cardPlayed.value, cardPlayed.color, deck[107].value, deck[107].color);
+                    canPlay = false;
+                }
             }
-            //if invalid, do not play card
-            else
-            {
-                printf("The %d%s cannot be placed on top of %d%s\n", cardPlayed.value, cardPlayed.color, deck[107].value, deck[107].color);
-                canPlay = false;
-            }
+        
             
             if (canPlay)
             {
@@ -182,11 +186,17 @@ int main (void)
             }
             
             //count player's hand if zero then win sequence, if one then say uno
+            if (cardCount(&playersH[pturn]) == 0)
+            {
+                win = true;
+            }
+            else if (cardCount(&playersH[pturn]) == 0)
+            {
+                printf("UNO!");
+            }
+            
+            
         }
-        
-        
-        
-        
         
     }
     
