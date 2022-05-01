@@ -69,8 +69,6 @@ int main (void)
     
     while(!win)             //check for if game is over
     {
-        bool canPlay = false;
-        
         //determine which player's turn
         pturn = pturn % numPlayers;
         
@@ -113,24 +111,28 @@ int main (void)
         }
         printf("'s turn!\n");
         
+        bool canPlay = false;
         while (!canPlay)
         {
             int pos = -1;
-            while( pos <= 0 || pos > cardCount(&playersH[pturn]) )
+            while( pos < 0 || pos > cardCount(&playersH[pturn]) )
             {
-                
                 //Ask player to select card and store selected card's position in pos
                 pos = promptPlayer(&playersH[pturn], deck, pturn);
                 
                 //check that desired position is within the player's hand range
-                if (pos <= 0 || pos > cardCount(&playersH[pturn]))
+                if (pos < 0 || pos > cardCount(&playersH[pturn]))
                 {
                     printf("Please enter a valid card number.\n");
                 }
-                
             }
             
-            if (pos > 0)
+            if (pos == 0)       //draw card selected
+            {
+                
+                drawCard(&playersH[pturn], &playersT[pturn], deck, numCards);
+            }
+            else
             {
                 //store card played
                 card cardPlayed = getCard(&playersH[pturn], pos);
@@ -150,7 +152,18 @@ int main (void)
                 }
             }
         
+            //count player's hand if zero then win sequence, if one then say uno
+            if (cardCount(&playersH[pturn]) == 0)
+            {
+                printf("WIN!!");
+                win = true;
+            }
+            else if (cardCount(&playersH[pturn]) == 1)
+            {
+                printf("UNO!");
+            }
             
+    
             if (canPlay)
             {
                 switch (deck[107].value) {
@@ -184,20 +197,19 @@ int main (void)
                         break;
                 }
             }
-            
-            //count player's hand if zero then win sequence, if one then say uno
-            if (cardCount(&playersH[pturn]) == 0)
+            else
             {
-                win = true;
-            }
-            else if (cardCount(&playersH[pturn]) == 0)
-            {
-                printf("UNO!");
+                pturn += pdirection;
             }
             
-            
-        }
-        
+            //exit canPlay loop if draw card was selected
+            if(pos == 0)
+            {
+                canPlay = true;
+            }
+           
+        }//end of !canPlay loop
+
     }
     
     return 0;

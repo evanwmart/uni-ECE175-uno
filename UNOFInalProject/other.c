@@ -223,6 +223,8 @@ void printHand(card* *head, int playerNum)
 //input: the deck array
 void printTopCard(card deck[])
 {
+    //Switch statement for value
+    
     printf("Discard pile:\n");
     printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄ \n");
     printf("⠯ %s ⠽⠿⠿⠿⠿\n", deck[107].color);
@@ -250,6 +252,8 @@ int cardCount(card* *head)
             count++;
         }
     }
+    
+    
     return count;
 }
 
@@ -280,14 +284,14 @@ void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
     
     //Shift cards in deck
     card *pt;
-    for (int i = 0; i < *cardsLeft; i++)
+    for (int i = 0; i < *cardsLeft - 1; i++)
     {
         pt = &deck[i];
         *pt = deck[i + 1];
     }
     
     //Decrease count of playable cards in deck
-    cardsLeft--;
+    *cardsLeft -= 1;
 }
 
 void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft) // moves the card from the players hand to the discard pile
