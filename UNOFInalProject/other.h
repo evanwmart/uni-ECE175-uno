@@ -43,7 +43,7 @@ card getCard(card* *head, int pos);
 
 #endif /* other_h */
 
-/*x
+/*
  ⠴⠖⠒⠲⠶⠶⠶⠶⠄
  ⠯ ♠ ⠽⠿⠿⠿⠿
  ⠿⠷⠖⠚⠛⠛⠻⠿⠇

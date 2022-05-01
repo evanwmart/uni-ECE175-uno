@@ -51,17 +51,17 @@ int main (void)
         bool canPlay = false;
         while (!canPlay)
         {
-            int c = 1;
-            while( c > 0 && c < cardCount(&playersH[pturn]) )
+            int c = -1;
+            while( c <= 0 && c > cardCount(&playersH[pturn]) )
             {
                 //Ask player to select card and stor selected card integer
                 c = promptPlayer(&playersH[pturn], deck, pturn);
                 //check that prompt player is within the players hand
-                if (c < 0 || c > cardCount(&playersH[pturn]))
+                if (c <= 0 || c > cardCount(&playersH[pturn]))
                 {
-                    
+                    printf("Please eneter a valid card number.\n");
                 }
-            )
+            }
         
             card cardPlayed = getCard(&playersH[pturn], c);
         
