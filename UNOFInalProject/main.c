@@ -51,15 +51,23 @@ int main (void)
         bool canPlay = false;
         while (!canPlay)
         {
-            //Ask player to select card and stor selected card integer
-            int c = promptPlayer(&playersH[pturn], deck, pturn);
-            //check that prompt player is within the players hand
-        
-            //getCard() !!NEED TO DO return cardPlayed
-        
-            if( cardCheck(<#card cardPlayed#>, deck[107]) )
+            int c = 1;
+            while( c > 0 && c < cardCount(&playersH[pturn]) )
             {
-                playCard(<#card **head#>, <#card **tail#>, <#int cardPos#>, <#card *deck#>);
+                //Ask player to select card and stor selected card integer
+                c = promptPlayer(&playersH[pturn], deck, pturn);
+                //check that prompt player is within the players hand
+                if (c < 0 || c > cardCount(&playersH[pturn]))
+                {
+                    
+                }
+            )
+        
+            card cardPlayed = getCard(&playersH[pturn], c);
+        
+            if( cardCheck(cardPlayed, deck[107]) )
+            {
+                playCard(&playersH[pturn], &playersT[pturn], c, deck);
                 canPlay = true;
             }
             else
