@@ -35,7 +35,7 @@ int main (void)
         scanf("%s", fileName);
         if (!readDeck(deck, fileName))
         {
-            printf("Error reading from file: %s\nPlease restart program.\n", fileName);
+            printf("Please restart program.\n");
             return -1;
         }
         else
@@ -70,6 +70,10 @@ int main (void)
     while(!win)             //check for if game is over
     {
         bool canPlay = false;
+        
+        //determine which player's turn
+        pturn = pturn % numPlayers;
+        
         while (!canPlay)
         {
             int pos = -1;
