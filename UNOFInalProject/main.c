@@ -169,6 +169,8 @@ int main (void)
                 int nextP;
                 switch (deck[107].value) {
                     case 10:    //skip card
+                        nextP = (pturn + pdirection) % numPlayers;
+                        printf("Player %d was skipped!\n", nextP+1);
                         pturn += (pdirection * 2);
                         break;
                         
