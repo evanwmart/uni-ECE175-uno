@@ -149,6 +149,7 @@ int main (void)
                 {
                     printf("The %d%s cannot be placed on top of %d%s\n", cardPlayed.value, cardPlayed.color, deck[107].value, deck[107].color);
                     canPlay = false;
+                    pturn -= pdirection;
                 }
             }
         
