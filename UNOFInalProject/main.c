@@ -75,7 +75,7 @@ int main (void)
     printf("The cards have been dealt.\n");
     
     
-    bool win = false;       //track wether game should continue
+    bool win = false;       //track whether game should continue
     int pturn = 0;          //track whose turn it is
     int pdirection = 1;     //the increment for direction of play (turn
     
