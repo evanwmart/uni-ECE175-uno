@@ -370,5 +370,34 @@ card getCard(card* *head, int pos){ //returns the card that the player last play
 }
 
 void colorChange(card *lastCard){
+    int i = -1;
     
+    while(i < 1 || i > 4)
+    {
+        printf("Please select what color you wish to change to.\nSpades:1\tHearts:2\tClubs:3\tDiamonds:4\nWhat color are you choosing?: ");
+        scanf("%d", &i);
+        
+        if (i < 1 || i > 4)
+        {
+            printf("That is not a valid selection.\n");
+        }
+    }
+    
+    switch (i) {
+        case 1:
+            strcpy(lastCard->color, "♠");
+            break;
+        
+        case 2:
+            strcpy(lastCard->color, "♥");
+            break;
+            
+        case 3:
+            strcpy(lastCard->color, "♣");
+            break;
+            
+        default:
+            strcpy(lastCard->color, "♦");
+            break;
+    }
 }
