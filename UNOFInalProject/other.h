@@ -2,8 +2,7 @@
 //  other.h
 //  UNOFInalProject
 //
-//  Created by Evan Martin on 4/22/22.
-//
+//  Created by Evan Martin & Brian Bedrosian
 
 #ifndef other_h
 #define other_h
@@ -44,6 +43,8 @@ bool cardCheck(card cardPlayed, card base); //if(cardPlayed.value!=base.value)
 card getCard(card* *head, int pos);
 
 void colorChange(card *lastCard);
+
+bool winSeq(int pturn);
 
 #endif /* other_h */
 

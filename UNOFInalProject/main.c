@@ -3,7 +3,6 @@
 //  UNOFInalProject
 //
 //  Created by Evan Martin & Brian Bedrosian
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -23,14 +22,14 @@ int main (void)
     card deck[108];
     readDeck(deck, "deck.txt");
     
-    startSeq(loadPt, playersPt, gameVarPt);
+    startSeq(loadPt, playersPt, gameVarPt);     //starting sequence to intialize game settings
     
-    if (loadType == 1)
+    if (loadType == 1)          //user has chosen to generate and shuffle a deck
     {
         generateDeck(deck);
         shuffle(deck, 108);
     }
-    else
+    else                        //user has chosen to load a deck from a file
     {
         char fileName[30];
         printf("Please enter the file name to load a deck: ");
@@ -45,15 +44,20 @@ int main (void)
             readDeck(deck, fileName);
         }
     }
-     
+    
+    
+    //create head and tail pointerss for however many players were selected
     card * playersH[numPlayers];
     card * playersT[numPlayers];
     
+    //set head and tail pointers to NULL
     for (int i = 0; i < numPlayers; i++)
     {
         playersH[i] = NULL;
         playersT[i] = NULL;
     }
+    
+    //Start of every player with 7 cards in their hand
     for(int i = 0; i < 7; i++)
     {
         for (int j = 0; j < numPlayers; j++)
@@ -62,21 +66,26 @@ int main (void)
         }
     }
     
-    drawCard(&playersH[0], &playersT[0], deck, numCards);       //draw another card and put it into discard pile
+    //draw and play one more card so the discard pile has a card on it
+    drawCard(&playersH[0], &playersT[0], deck, numCards);
     playCard(&playersH[0], &playersT[0], 8, deck, numCards);
     
+    //print gap and statement
     printf("\n\n\n\n\n\n\n\n");
     printf("The cards have been dealt.\n");
+    
     
     bool win = false;       //track wether game should continue
     int pturn = 0;          //track whose turn it is
     int pdirection = 1;     //the increment for direction of play (turn
     
-    while(!win)             //check for if game is over
+    //game loop
+    while(!win)
     {
-        //determine which player's turn
+        //Determine which player's turn it is
         pturn = pturn % numPlayers;
         
+        //Print which player's turn it is
         printf("Player");
         switch (pturn) {
             case 0:
@@ -115,7 +124,10 @@ int main (void)
         }
         printf("'s turn!\n");
         
+        
+        
         bool canPlay = false;
+        //Player prompt loop
         while (!canPlay)
         {
             int pos = -1;
@@ -131,9 +143,9 @@ int main (void)
                 }
             }
             
-            if (pos == 0)       //draw card selected
+            //Check if player has chosen to draw a card
+            if (pos == 0)
             {
-                
                 drawCard(&playersH[pturn], &playersT[pturn], deck, numCards);
             }
             else
@@ -154,20 +166,21 @@ int main (void)
                     printf("The %d%s cannot be placed on top of %d%s\n", cardPlayed.value, cardPlayed.color, deck[107].value, deck[107].color);
                     canPlay = false;
                 }
+                
             }
         
-            //count player's hand if zero then win sequence, if one then say uno
+            //count player's hand, if zero then win sequence, if one then say "UNO"
             if (cardCount(&playersH[pturn]) == 0)
             {
-                printf("WIN!!");
-                win = true;
+                win = winSeq(pturn);
+                canPlay = false;
             }
             else if (cardCount(&playersH[pturn]) == 1)
             {
                 printf("UNO!");
             }
             
-    
+            //If card was playable, check how the card affects the turn rotation
             if (canPlay)
             {
                 int nextP;
@@ -175,26 +188,26 @@ int main (void)
                     case 10:    //skip card
                         nextP = (pturn + pdirection) % numPlayers;
                         printf("Player %d was skipped!\n", nextP+1);
-                        pturn += (pdirection * 2);
+                        pturn += (pdirection * 2);  //change turn
                         break;
                         
                     case 11:    //reverse card
                         pdirection = pdirection * -1;
-                        pturn += pdirection;    //change turn
+                        pturn += pdirection;        //change turn
                         break;
                     
                     case 12:    //pickup 2 card
-                        //pick up two for next player
+                        //Pick up two for next player
                         nextP = (pturn + pdirection) % numPlayers;
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
-                        pturn += pdirection;    //change turn
+                        pturn += pdirection;        //change turn
                         break;
                         
                     case 13:    //wild card
-                        //prompt to change color "colorChange()"
+                        //Prompt to change color
                         colorChange(&deck[107]);
-                        pturn += pdirection;    //change turn
+                        pturn += pdirection;        //change turn
                         break;
                         
                     case 14:    //pickup 4 card
@@ -214,14 +227,13 @@ int main (void)
                         break;
                 }
             }
-            else
+            else    //Card was not playable (Zero or invalid card was selected)
             {
-                if (pos == 0)
+                if (pos == 0)   //If it was Zero
                 {
                     pturn += pdirection;
                 }
             }
-            
             //exit canPlay loop if draw card was selected
             if(pos == 0)
             {
@@ -229,7 +241,6 @@ int main (void)
             }
            
         }//end of !canPlay loop
-        
         printf("\n\n\n\n\n\n\n\n");
     }
     
