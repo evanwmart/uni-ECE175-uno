@@ -10,6 +10,61 @@
 #include <string.h>
 #include "other.h"
 
+void generateDeck(card deck[])
+{
+    card *pt;
+    int i = 0;
+    for (int s = 0; s < 4; s++)
+    {
+        for(int n = 0; n < 15; n++)
+        {
+            pt = &deck[i];
+            pt->value = n;
+            switch (s) {
+                case 0:
+                    strcpy(pt->color, "♠");
+                    break;
+                    
+                case 1:
+                    strcpy(pt->color, "♥");
+                    break;
+                    
+                case 2:
+                    strcpy(pt->color, "♣");
+                    break;
+                    
+                default:
+                    strcpy(pt->color, "♦");
+                    break;
+            }
+            i++;
+        }
+        for(int n = 1; n < 13; n++)
+        {
+            pt = &deck[i];
+            pt->value = n;
+            switch (s) {
+                case 0:
+                    strcpy(pt->color, "♠");
+                    break;
+                    
+                case 1:
+                    strcpy(pt->color, "♥");
+                    break;
+                    
+                case 2:
+                    strcpy(pt->color, "♣");
+                    break;
+                    
+                default:
+                    strcpy(pt->color, "♦");
+                    break;
+            }
+            i++;
+        }
+    }
+}
+
 //function to shuffle an array
 //input: the array and the index number of which empty slots start
 void shuffle(card deck[], int size)
@@ -34,11 +89,11 @@ void startSeq(int *loadType, int*players, int*gameVar)
 
     printf("Let’s Play a Game of UNO\n");
     
-    while(!(*players < 11 && 0 < *players))
+    while(!(*players < 11 && 1 < *players))
     {
-    printf("We can accomodate 1-10 players.\nHow many players are participating? ");
+    printf("We can accomodate 2-10 players.\nHow many players are participating? ");
     scanf("%d", players);
-        if (*players < 1 || 10 < *players)
+        if (*players < 2 || 10 < *players)
         {
             printf("Sorry, please enter a valid number of players.\n");
         }
@@ -113,9 +168,13 @@ bool readDeck(card deck[], char fileName[])
 void printHand(card* *head, int playerNum)
 {
     card *instance = *head;
-    if (instance->t != NULL)
+    if (instance != NULL)
     {
         int count = 0;
+        if(instance->t == NULL)
+        {
+            count = 1;
+        }
         while (instance->t != NULL)
         {
             count++;
@@ -178,7 +237,19 @@ void printHand(card* *head, int playerNum)
         //2
         for (int i = 0; i <= count; i++)
         {
-            printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
+            switch (array[i].value) {
+                case 13:
+                    printf("⠯ W ⠽⠿⠿⠿⠿\t");
+                    break;
+                    
+                case 14:
+                    printf("⠯+4 ⠽⠿⠿⠿⠿\t");
+                    break;
+                    
+                default:
+                    printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
+                    break;
+            }
         }
         printf("\n");
         
@@ -192,7 +263,31 @@ void printHand(card* *head, int playerNum)
         //4
         for (int i = 0; i <= count; i++)
         {
-            printf("⠿⠇ %2d  ⠸⠿\t", array[i].value);
+            switch (array[i].value) {
+                case 10:
+                    printf("⠿⠇SKIP ⠸⠿\t");
+                    break;
+                    
+                case 11:
+                    printf("⠿⠇ REV ⠸⠿\t");
+                    break;
+                    
+                case 12:
+                    printf("⠿⠇ +2  ⠸⠿\t");
+                    break;
+                    
+                case 13:
+                    printf("⠿⠇WILD ⠸⠿\t");
+                    break;
+                    
+                case 14:
+                    printf("⠿⠇ +4  ⠸⠿\t");
+                    break;
+                    
+                default:
+                    printf("⠿⠇ %2d  ⠸⠿\t", array[i].value);
+                    break;
+            }
         }
         printf("\n");
         
@@ -206,7 +301,19 @@ void printHand(card* *head, int playerNum)
         //6
         for (int i = 0; i <= count; i++)
         {
-            printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
+            switch (array[i].value) {
+                case 13:
+                    printf("⠿⠿⠿⠿⠯ W ⠽\t");
+                    break;
+                    
+                case 14:
+                    printf("⠿⠿⠿⠿⠯ +4⠽\t");
+                    break;
+                    
+                default:
+                    printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
+                    break;
+            }
         }
         printf("\n");
         
@@ -223,13 +330,35 @@ void printHand(card* *head, int playerNum)
 //input: the deck array
 void printTopCard(card deck[])
 {
-    //Switch statement for value
-    
     printf("Discard pile:\n");
     printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄ \n");
     printf("⠯ %s ⠽⠿⠿⠿⠿\n", deck[107].color);
     printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇ \n");
-    printf("⠿⠇ %2d  ⠸⠿\n", deck[107].value);
+    switch (deck[107].value) {
+        case 10:
+            printf("⠿⠇SKIP ⠸⠿\n");
+            break;
+            
+        case 11:
+            printf("⠿⠇ REV ⠸⠿\n");
+            break;
+            
+        case 12:
+            printf("⠿⠇ +2  ⠸⠿\n");
+            break;
+            
+        case 13:
+            printf("⠿⠇WILD ⠸⠿\n");
+            break;
+            
+        case 14:
+            printf("⠿⠇ +4  ⠸⠿\n");
+            break;
+            
+        default:
+            printf("⠿⠇ %2d  ⠸⠿\n", deck[107].value);
+            break;
+    }
     printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇ \n");
     printf("⠿⠿⠿⠿⠯ %s ⠽\n", deck[107].color);
     printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁ \n");
@@ -248,8 +377,8 @@ int cardCount(card* *head)
         count = 1;
         while(instance->t != NULL)
         {
-            instance = instance->t;
             count++;
+            instance = instance->t;
         }
     }
     
@@ -356,7 +485,13 @@ bool cardCheck(card cardPlayed, card base){ //checks if the users selected card 
     if((cardPlayed.value == base.value) || strcmp(cardPlayed.color, base.color) == 0){
         return true;
     }
-    else{
+    else if (cardPlayed.value == 13){
+        return true;
+    }
+    else if (cardPlayed.value == 14){
+        return true;        // !! Challenge/rules on +4
+    }
+    else {
         return false;
     }
     

@@ -19,6 +19,8 @@ typedef struct card_s {
     struct card_s *h;   //prev card
 } card;
 
+void generateDeck(card deck[]);
+
 void shuffle(card deck[], int size);
 
 bool readDeck(card deck[], char fileName[]);

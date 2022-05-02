@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 #include "other.h"
 #include <assert.h>
 #include <stdbool.h>
@@ -26,6 +27,7 @@ int main (void)
     
     if (loadType == 1)
     {
+        generateDeck(deck);
         shuffle(deck, 108);
     }
     else
@@ -63,6 +65,9 @@ int main (void)
     drawCard(&playersH[0], &playersT[0], deck, numCards);       //draw another card and put it into discard pile
     playCard(&playersH[0], &playersT[0], 8, deck, numCards);
     
+    printf("\n\n\n\n\n\n\n\n");
+    printf("The cards have been dealt.\n");
+    
     bool win = false;       //track wether game should continue
     int pturn = 0;          //track whose turn it is
     int pdirection = 1;     //the increment for direction of play (turn
@@ -72,7 +77,6 @@ int main (void)
         //determine which player's turn
         pturn = pturn % numPlayers;
         
-        printf("\n\n\n\n\n\n\n\n");
         printf("Player");
         switch (pturn) {
             case 0:
@@ -225,7 +229,8 @@ int main (void)
             }
            
         }//end of !canPlay loop
-
+        
+        printf("\n\n\n\n\n\n\n\n");
     }
     
     return 0;
