@@ -34,7 +34,7 @@ int cardCount(card* *head);
 
 void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft);
 
-void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft);
+void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft, int *numPlayed);
 
 int promptPlayer(card* *head, card deck[], int playerNum); // printTopCard(), printHand(), cardCount() --- returns desired crd position to play
 
@@ -45,6 +45,8 @@ card getCard(card* *head, int pos);
 void colorChange(card *lastCard);
 
 bool winSeq(int pturn);
+
+void resetDeck(card deck[],int *numCards,int *numPlayed);
 
 #endif /* other_h */
 

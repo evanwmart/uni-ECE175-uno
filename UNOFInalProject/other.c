@@ -66,14 +66,14 @@ void generateDeck(card deck[])
 
 //function to shuffle an array
 //input: the array and the index number of which empty slots start
-void shuffle(card deck[], int size)
+void shuffle(card deck[], int numCards)
 {
     card * pt;
-    for (int i = 0; i < size * 10; i++)
+    for (int i = 0; i < numCards * 10; i++)
     {
-        int index1 = rand() % size;
+        int index1 = rand() % numCards;
         card temp = deck[index1];
-        int index2 = rand() % size;
+        int index2 = rand() % numCards;
         pt = &deck[index1];
         *pt = deck[index2];
         pt = &deck[index2];
@@ -413,7 +413,7 @@ void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
     *cardsLeft -= 1;
 }
 
-void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft) // moves the card from the players hand to the discard pile
+void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft, int *numPlayed) // moves the card from the players hand to the discard pile
 {
     card *pt = *head;
     
@@ -457,6 +457,7 @@ void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft
     disc->t = NULL;
     disc->h = NULL;
     
+    *numPlayed+= 1;
 }
 
 int promptPlayer(card* *head, card deck[], int playerNum){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
@@ -587,4 +588,21 @@ bool winSeq(int pturn){
     else {
         return true;
     }
+}
+
+void resetDeck(card deck[],int *numCards,int *numPlayed){
+    card *pt;
+    for (int i = 0; i < (108 - *numPlayed); i++)
+    {
+        pt = &deck[i];
+        *pt = deck[(108-*numPlayed)+i];
+    }
+    for (int i = (108 - *numPlayed); i < 108; i++)
+    {
+        pt = &deck[i];
+        strcpy(pt->color, "X");
+        pt->value = -1;
+    }
+    *numCards = *numPlayed;
+    *numPlayed = 0;
 }

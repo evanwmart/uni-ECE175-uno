@@ -14,11 +14,12 @@
 
 int main (void)
 {
-    int loadType = 0, numPlayers = 0, gameVar = 0, cardsLeft = 108;
+    int loadType = 0, numPlayers = 0, gameVar = 0, cardsPlayed = 0, cardsLeft = 108;
     int* loadPt = &loadType;
     int* playersPt = &numPlayers;
     int* gameVarPt = &gameVar;
     int* numCards = &cardsLeft;
+    int* numPlayed = &cardsPlayed;
     card deck[108];
     readDeck(deck, "deck.txt");
     
@@ -27,7 +28,7 @@ int main (void)
     if (loadType == 1)          //user has chosen to generate and shuffle a deck
     {
         generateDeck(deck);
-        shuffle(deck, 108);
+        shuffle(deck, cardsLeft);
     }
     else                        //user has chosen to load a deck from a file
     {
@@ -68,7 +69,7 @@ int main (void)
     
     //draw and play one more card so the discard pile has a card on it
     drawCard(&playersH[0], &playersT[0], deck, numCards);
-    playCard(&playersH[0], &playersT[0], 8, deck, numCards);
+    playCard(&playersH[0], &playersT[0], 8, deck, numCards, numPlayed);
     
     //print gap and statement
     printf("\n\n\n\n\n\n\n\n");
@@ -84,6 +85,11 @@ int main (void)
     {
         //Determine which player's turn it is
         pturn = pturn % numPlayers;
+        
+        if (cardsLeft == 0){
+            resetDeck(deck, numCards, numPlayed);
+            shuffle(deck, *numCards);
+        }
         
         //Print which player's turn it is
         printf("Player");
@@ -157,7 +163,7 @@ int main (void)
                 if( cardCheck(cardPlayed, deck[107]) )
                 {
                     //if valid, play card
-                    playCard(&playersH[pturn], &playersT[pturn], pos, deck, numCards);
+                    playCard(&playersH[pturn], &playersT[pturn], pos, deck, numCards, numPlayed);
                     canPlay = true;
                 }
                 //if invalid, do not play card
