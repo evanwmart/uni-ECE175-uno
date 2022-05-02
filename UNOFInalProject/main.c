@@ -155,7 +155,7 @@ int main (void)
             //count player's hand if zero then win sequence, if one then say uno
             if (cardCount(&playersH[pturn]) == 0)
             {
-                printf("WIN!!");
+                printf("Player %d has won!", pturn+1);
                 win = true;
             }
             else if (cardCount(&playersH[pturn]) == 1)
