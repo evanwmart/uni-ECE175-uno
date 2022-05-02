@@ -2,7 +2,7 @@
 //  main.c
 //  UNOFInalProject
 //
-//  Created by Evan Martin on 4/21/22.
+//  Created by Evan Martin & Brian Bedrosian
 
 #include <stdio.h>
 #include <string.h>
