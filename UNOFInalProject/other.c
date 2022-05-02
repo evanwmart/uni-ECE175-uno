@@ -169,19 +169,11 @@ void printHand(card* *head, int playerNum)
     card *instance = *head;
     if (instance != NULL)
     {
-        int count = 0;
-        if(instance->t == NULL)
-        {
-            count = 1;
-        }
-        while (instance->t != NULL)
-        {
-            count++;
-            instance = instance->t;
-        }
-        card array[count+1];
+        int count = cardCount(head);
+        
+        card array[count];
         instance = *head;
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
             array[i] = *instance;
             if(instance->t != NULL)
@@ -227,14 +219,14 @@ void printHand(card* *head, int playerNum)
         }
         printf("'s hand:\n");
         //1
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
             printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
         }
         printf("\n");
         
         //2
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
             switch (array[i].value) {
                 case 13:
@@ -253,14 +245,14 @@ void printHand(card* *head, int playerNum)
         printf("\n");
         
         //3
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
             printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
         }
         printf("\n");
 
         //4
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
             switch (array[i].value) {
                 case 10:
@@ -291,14 +283,14 @@ void printHand(card* *head, int playerNum)
         printf("\n");
         
         //5
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
             printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
         }
         printf("\n");
         
         //6
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
             switch (array[i].value) {
                 case 13:
@@ -317,7 +309,7 @@ void printHand(card* *head, int playerNum)
         printf("\n");
         
         //7
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
             printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
         }
@@ -581,7 +573,7 @@ bool winSeq(int pturn){
     while (resp != 'y' && resp != 'n')
     {
         printf("Would you like to play again? (y/n): ");
-        scanf("%c", &resp);
+        scanf("%*c%c", &resp);
         
         if (resp != 'y' && resp != 'n')
         {

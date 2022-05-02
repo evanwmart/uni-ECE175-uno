@@ -240,9 +240,9 @@ int main (void)
                 canPlay = true;
             }
            
+            
+            
         }//end of !canPlay loop
-        printf("\n\n\n\n\n\n\n\n");
-    }
-    
+    }//end of game loop
     return 0;
-}
+}//end of main
