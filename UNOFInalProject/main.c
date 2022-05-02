@@ -187,6 +187,7 @@ int main (void)
                         
                     case 13:    //wild card
                         //prompt to change color "colorChange()"
+                        
                         pturn += pdirection;    //change turn
                         break;
                         
@@ -198,7 +199,7 @@ int main (void)
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         //prompt to change color "colorChange()"
-                        
+                        //
                         pturn += pdirection;    //change turn
                         break;
                         

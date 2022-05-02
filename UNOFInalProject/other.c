@@ -368,3 +368,7 @@ card getCard(card* *head, int pos){ //returns the card that the player last play
     }
     return *temp;
 }
+
+void colorChange(card *lastCard){
+    
+}
