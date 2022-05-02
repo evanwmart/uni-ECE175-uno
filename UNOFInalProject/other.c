@@ -239,7 +239,7 @@ int cardCount(card* *head)
 {
     card *instance = *head;
     int count = 0;
-    if (instance->t == NULL)
+    if (instance == NULL)
     {
         return count;
     }
@@ -252,7 +252,6 @@ int cardCount(card* *head)
             count++;
         }
     }
-    
     
     return count;
 }
@@ -307,7 +306,10 @@ void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft
     {
         played = pt;
         *head = pt->t;
+        if (pt->t != NULL)
+        {
         (pt->t)->h = pt->h;
+        }
     }
     else if (pt == *tail)
     {
