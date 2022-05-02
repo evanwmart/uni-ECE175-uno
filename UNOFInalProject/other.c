@@ -2,7 +2,7 @@
 //  other.c
 //  UNOFInalProject
 //
-//  Created by Evan Martin on 4/22/22.
+//  Created by Evan Martin & Brian Bedrosian on 4/22/22.
 //
 
 #include <stdio.h>
