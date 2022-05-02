@@ -166,6 +166,7 @@ int main (void)
     
             if (canPlay)
             {
+                int nextP;
                 switch (deck[107].value) {
                     case 10:    //skip card
                         pturn += (pdirection * 2);
@@ -173,27 +174,36 @@ int main (void)
                         
                     case 11:    //reverse card
                         pdirection = pdirection * -1;
-                        pturn += pdirection;
+                        pturn += pdirection;    //change turn
                         break;
                     
                     case 12:    //pickup 2 card
-                        pturn += pdirection;
                         //pick up two for next player
+                        nextP = (pturn + pdirection) % numPlayers;
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        pturn += pdirection;    //change turn
                         break;
                         
                     case 13:    //wild card
-                        pturn += pdirection;
                         //prompt to change color "colorChange()"
+                        pturn += pdirection;    //change turn
                         break;
                         
                     case 14:    //pickup 4 card
-                        pturn += pdirection;
                         //pick up 4 for next player
+                        nextP = (pturn + pdirection) % numPlayers;
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         //prompt to change color "colorChange()"
+                        
+                        pturn += pdirection;    //change turn
                         break;
                         
                     default:
-                        pturn += pdirection;
+                        pturn += pdirection;    //change turn
                         break;
                 }
             }
