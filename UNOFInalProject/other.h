@@ -41,6 +41,8 @@ bool cardCheck(card cardPlayed, card base); //if(cardPlayed.value!=base.value)
 
 card getCard(card* *head, int pos);
 
+void colorChange(card *lastCard);
+
 #endif /* other_h */
 
 /*

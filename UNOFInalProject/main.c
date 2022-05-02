@@ -169,6 +169,8 @@ int main (void)
                 int nextP;
                 switch (deck[107].value) {
                     case 10:    //skip card
+                        nextP = (pturn + pdirection) % numPlayers;
+                        printf("Player %d was skipped!\n", nextP+1);
                         pturn += (pdirection * 2);
                         break;
                         
@@ -187,7 +189,7 @@ int main (void)
                         
                     case 13:    //wild card
                         //prompt to change color "colorChange()"
-                        
+                        colorChange(&deck[107]);
                         pturn += pdirection;    //change turn
                         break;
                         
@@ -199,7 +201,7 @@ int main (void)
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         //prompt to change color "colorChange()"
-                        //
+                        colorChange(&deck[107]);
                         pturn += pdirection;    //change turn
                         break;
                         
