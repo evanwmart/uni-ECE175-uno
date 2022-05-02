@@ -149,7 +149,6 @@ int main (void)
                 {
                     printf("The %d%s cannot be placed on top of %d%s\n", cardPlayed.value, cardPlayed.color, deck[107].value, deck[107].color);
                     canPlay = false;
-                    pturn -= pdirection;
                 }
             }
         
@@ -213,7 +212,10 @@ int main (void)
             }
             else
             {
-                pturn += pdirection;
+                if (pos == 0)
+                {
+                    pturn += pdirection;
+                }
             }
             
             //exit canPlay loop if draw card was selected
