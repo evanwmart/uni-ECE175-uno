@@ -139,173 +139,168 @@ int main (void)
                 }
             }
         }
-        
-        //Determine which player's turn it is
-        pturn = pturn % numPlayers;
-        
-        
-        if (cardsLeft == 0){
-            resetDeck(deck, numCards, numPlayed);
-            shuffle(deck, *numCards);
-        }
-        
-        //Print which player's turn it is
-        printf("Player");
-        switch (pturn) {
-            case 0:
-                printf(" one");
-                break;
-            case 1:
-                printf(" two");
-                break;
-            case 2:
-                printf(" three");
-                break;
-            case 3:
-                printf(" four");
-                break;
-            case 4:
-                printf(" five");
-                break;
-            case 5:
-                printf(" six");
-                break;
-            case 6:
-                printf(" seven");
-                break;
-            case 7:
-                printf(" eight");
-                break;
-            case 8:
-                printf(" nine");
-                break;
-            case 9:
-                printf(" ten");
-                break;
-            default:
-                printf("");
-                break;
-        }
-        printf("'s turn!\n");
-        
-        
-        
-        bool canPlay = false;
-        //Player prompt loop
-        while (!canPlay)
+        else
         {
-            int pos = -1;
-            while( pos < 0 || pos > cardCount(&playersH[pturn]) )
-            {
-                //Ask player to select card and store selected card's position in pos
-                pos = promptPlayer(&playersH[pturn], deck, pturn);
-                
-                //check that desired position is within the player's hand range
-                if (pos < 0 || pos > cardCount(&playersH[pturn]))
-                {
-                    printf("Please enter a valid card number.\n");
-                }
+            if (cardsLeft == 0){
+                resetDeck(deck, numCards, numPlayed);
+                shuffle(deck, *numCards);
             }
             
-            //Check if player has chosen to draw a card
-            if (pos == 0)
-            {
-                drawCard(&playersH[pturn], &playersT[pturn], deck, numCards);
+            //Print which player's turn it is
+            printf("Player");
+            switch (pturn) {
+                case 0:
+                    printf(" one");
+                    break;
+                case 1:
+                    printf(" two");
+                    break;
+                case 2:
+                    printf(" three");
+                    break;
+                case 3:
+                    printf(" four");
+                    break;
+                case 4:
+                    printf(" five");
+                    break;
+                case 5:
+                    printf(" six");
+                    break;
+                case 6:
+                    printf(" seven");
+                    break;
+                case 7:
+                    printf(" eight");
+                    break;
+                case 8:
+                    printf(" nine");
+                    break;
+                case 9:
+                    printf(" ten");
+                    break;
+                default:
+                    printf("");
+                    break;
             }
-            else
+            printf("'s turn!\n");
+            
+            
+            
+            bool canPlay = false;
+            //Player prompt loop
+            while (!canPlay)
             {
-                //store card played
-                card cardPlayed = getCard(&playersH[pturn], pos);
-                
-                //check if the card chosen to play is valid to play
-                if( cardCheck(cardPlayed, deck[107]) )
+                int pos = -1;
+                while( pos < 0 || pos > cardCount(&playersH[pturn]) )
                 {
-                    //if valid, play card
-                    playCard(&playersH[pturn], &playersT[pturn], pos, deck, numCards, numPlayed);
-                    canPlay = true;
+                    //Ask player to select card and store selected card's position in pos
+                    pos = promptPlayer(&playersH[pturn], deck, pturn);
+                    
+                    //check that desired position is within the player's hand range
+                    if (pos < 0 || pos > cardCount(&playersH[pturn]))
+                    {
+                        printf("Please enter a valid card number.\n");
+                    }
                 }
-                //if invalid, do not play card
+                
+                //Check if player has chosen to draw a card
+                if (pos == 0)
+                {
+                    drawCard(&playersH[pturn], &playersT[pturn], deck, numCards);
+                }
                 else
                 {
-                    printf("The %d%s cannot be placed on top of %d%s\n", cardPlayed.value, cardPlayed.color, deck[107].value, deck[107].color);
+                    //store card played
+                    card cardPlayed = getCard(&playersH[pturn], pos);
+                    
+                    //check if the card chosen to play is valid to play
+                    if( cardCheck(cardPlayed, deck[107]) )
+                    {
+                        //if valid, play card
+                        playCard(&playersH[pturn], &playersT[pturn], pos, deck, numCards, numPlayed);
+                        canPlay = true;
+                    }
+                    //if invalid, do not play card
+                    else
+                    {
+                        printf("The %d%s cannot be placed on top of %d%s\n", cardPlayed.value, cardPlayed.color, deck[107].value, deck[107].color);
+                        canPlay = false;
+                    }
+                    
+                }
+            
+                //count player's hand, if zero then win sequence, if one then say "UNO"
+                if (cardCount(&playersH[pturn]) == 0)
+                {
+                    win = winSeq(pturn);
                     canPlay = false;
                 }
-                
-            }
-        
-            //count player's hand, if zero then win sequence, if one then say "UNO"
-            if (cardCount(&playersH[pturn]) == 0)
-            {
-                win = winSeq(pturn);
-                canPlay = false;
-            }
-            else if (cardCount(&playersH[pturn]) == 1)
-            {
-                printf("UNO!");
-            }
-            
-            //If card was playable, check how the card affects the turn rotation
-            if (canPlay)
-            {
-                int nextP;
-                switch (deck[107].value) {
-                    case 10:    //skip card
-                        nextP = (pturn + pdirection) % numPlayers;
-                        printf("Player %d was skipped!\n", nextP+1);
-                        pturn += (pdirection * 2);  //change turn
-                        break;
-                        
-                    case 11:    //reverse card
-                        pdirection = pdirection * -1;
-                        pturn += pdirection;        //change turn
-                        break;
-                    
-                    case 12:    //pickup 2 card
-                        //Pick up two for next player
-                        nextP = (pturn + pdirection) % numPlayers;
-                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
-                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
-                        pturn += pdirection;        //change turn
-                        break;
-                        
-                    case 13:    //wild card
-                        //Prompt to change color
-                        colorChange(&deck[107]);
-                        pturn += pdirection;        //change turn
-                        break;
-                        
-                    case 14:    //pickup 4 card
-                        //pick up 4 for next player
-                        nextP = (pturn + pdirection) % numPlayers;
-                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
-                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
-                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
-                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
-                        //prompt to change color "colorChange()"
-                        colorChange(&deck[107]);
-                        pturn += pdirection;    //change turn
-                        break;
-                        
-                    default:
-                        pturn += pdirection;    //change turn
-                        break;
-                }
-            }
-            else    //Card was not playable (Zero or invalid card was selected)
-            {
-                if (pos == 0)   //If it was Zero
+                else if (cardCount(&playersH[pturn]) == 1)
                 {
-                    pturn += pdirection;
+                    printf("UNO!");
                 }
-            }
-            //exit canPlay loop if draw card was selected
-            if(pos == 0)
-            {
-                canPlay = true;
-            }
-           
-            
-            
+                
+                //If card was playable, check how the card affects the turn rotation
+                if (canPlay)
+                {
+                    int nextP;
+                    switch (deck[107].value) {
+                        case 10:    //skip card
+                            nextP = (pturn + pdirection) % numPlayers;
+                            printf("Player %d was skipped!\n", nextP+1);
+                            pturn += (pdirection * 2);  //change turn
+                            break;
+                            
+                        case 11:    //reverse card
+                            pdirection = pdirection * -1;
+                            pturn += pdirection;        //change turn
+                            break;
+                        
+                        case 12:    //pickup 2 card
+                            //Pick up two for next player
+                            nextP = (pturn + pdirection) % numPlayers;
+                            drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                            drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                            pturn += pdirection;        //change turn
+                            break;
+                            
+                        case 13:    //wild card
+                            //Prompt to change color
+                            colorChange(&deck[107]);
+                            pturn += pdirection;        //change turn
+                            break;
+                            
+                        case 14:    //pickup 4 card
+                            //pick up 4 for next player
+                            nextP = (pturn + pdirection) % numPlayers;
+                            drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                            drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                            drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                            drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                            //prompt to change color "colorChange()"
+                            colorChange(&deck[107]);
+                            pturn += pdirection;    //change turn
+                            break;
+                            
+                        default:
+                            pturn += pdirection;    //change turn
+                            break;
+                    }
+                }
+                else    //Card was not playable (Zero or invalid card was selected)
+                {
+                    if (pos == 0)   //If it was Zero
+                    {
+                        pturn += pdirection;
+                    }
+                }
+                //exit canPlay loop if draw card was selected
+                if(pos == 0)
+                {
+                    canPlay = true;
+                }
+        }//end of AI else
         }//end of !canPlay loop
     }//end of game loop
     return 0;

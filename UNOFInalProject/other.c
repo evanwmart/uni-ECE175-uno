@@ -683,21 +683,27 @@ void AITurn(card* *head, card* *tail, card deck[], int *direction, card discard,
     
     if (checkWild(&temp, pPt)){
         playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
+        printf("AI Player has played WILD and set color to %s.\n", deck[107].color);
     }
     else if (checkColor(&temp, pPt, discard.color)){
         playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
+        printf("AI Player has played %d%s.\n", deck[107].value, deck[107].color);
     }
     else if (checkValue(&temp, pPt, discard.value)){
         playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
+        printf("AI Player has played %d%s.\n", deck[107].value, deck[107].color);
     }
     else if(checkFour(&temp, pPt)){
         playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
+        printf("AI Player has played +4 and set color to %s.\n", deck[107].color);
     }
     else{
         drawCard(&temp, tail, deck, cardsLeft);
+        printf("AI Player has drawn a card.\n");
     }
     
-    //turn alteration
+    printf("AI player now has %d card(s) left.\n", cardCount(head));
+    
 }
 
 bool checkWild(card* *head, int *pos){
