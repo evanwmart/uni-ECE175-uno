@@ -641,7 +641,7 @@ int promptAI(int numPlayers){ //asks user if they want to play with an AI, then 
     char userChoice='b';
     while (userChoice != 'y' && userChoice != 'n')
     {
-        printf("Do you want to play with an AI? y/n: \n");
+        printf("Do you want to play with an AI? y/n: ");
         scanf("%*c%c", &userChoice);
         
         if (userChoice != 'y' && userChoice != 'n')
@@ -682,23 +682,23 @@ void AITurn(card* *head, card* *tail, card deck[], int *direction, card discard,
     card *temp = *head;
     
     if (checkWild(&temp, pPt)){
-        playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
-        printf("AI Player has played WILD and set color to %s.\n", deck[107].color);
+        playCard(head, tail, *pPt, deck, cardsLeft, numPlayed);
+        printf("AI Player has played WILD.\n");
     }
     else if (checkColor(&temp, pPt, discard.color)){
-        playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
-        printf("AI Player has played %d%s.\n", deck[107].value, deck[107].color);
+        playCard(head, tail, *pPt, deck, cardsLeft, numPlayed);
+        printf("AI Player has played their turn.\n");
     }
     else if (checkValue(&temp, pPt, discard.value)){
-        playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
-        printf("AI Player has played %d%s.\n", deck[107].value, deck[107].color);
+        playCard(head, tail, *pPt, deck, cardsLeft, numPlayed);
+        printf("AI Player has played their turn.\n");
     }
     else if(checkFour(&temp, pPt)){
-        playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
-        printf("AI Player has played +4 and set color to %s.\n", deck[107].color);
+        playCard(head, tail, *pPt, deck, cardsLeft, numPlayed);
+        printf("AI Player has played their turn.\n");
     }
     else{
-        drawCard(&temp, tail, deck, cardsLeft);
+        drawCard(head, tail, deck, cardsLeft);
         printf("AI Player has drawn a card.\n");
     }
     
@@ -710,12 +710,12 @@ bool checkWild(card* *head, int *pos){
     card *temp = *head;
     int position = 1;
     while (temp->t != NULL){
-        position++;
-        temp = temp->t;
         if (temp->value == 13){
             *pos = position;
             return true;
         }
+        position++;
+        temp = temp->t;
     }
     return false;
 }
@@ -724,12 +724,12 @@ bool checkColor(card* *head, int *pos, char color[]){
     card *temp = *head;
     int position = 1;
     while (temp->t != NULL){
-        position++;
-        temp = temp->t;
-        if (strcmp(temp->color, color)){
+        if (strcmp(temp->color, color) == 0){
             *pos = position;
             return true;
         }
+        position++;
+        temp = temp->t;
     }
     return false;
 }
@@ -739,12 +739,12 @@ bool checkValue(card* *head, int *pos, int value){
     card *temp = *head;
     int position = 1;
     while (temp->t != NULL){
-        position++;
-        temp = temp->t;
         if (temp->value == value){
             *pos = position;
             return true;
         }
+        position++;
+        temp = temp->t;
     }
     return false;
 }
@@ -753,12 +753,12 @@ bool checkFour(card* *head, int *pos){
     card *temp = *head;
     int position = 1;
     while (temp->t != NULL){
-        position++;
-        temp = temp->t;
         if (temp->value == 14){
             *pos = position;
             return true;
         }
+        position++;
+        temp = temp->t;
     }
     return false;
 }

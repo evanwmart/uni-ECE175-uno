@@ -88,13 +88,15 @@ int main (void)
         //Determine which player's turn it is
         pturn = pturn % numPlayers;
         
+        //AI Check
         if((pturn == numAI) && *AIplayer != -1){
             int checkPlayed = *numPlayed;
+            int checkDrawn = cardCount(&playersH[pturn]);
             AITurn(&playersH[pturn], &playersT[pturn], deck, &pdirection, deck[107], numCards, numPlayed);
             int nextP;
             
             //determine turn dynamics and direction
-            if (checkPlayed != *numPlayed){
+            if (checkPlayed != *numPlayed && checkDrawn != cardCount(&playersH[pturn])){
                 switch (deck[107].value) {
                     case 10:    //skip card
                         nextP = (pturn + pdirection) % numPlayers;
