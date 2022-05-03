@@ -88,6 +88,8 @@ int main (void)
         //Determine which player's turn it is
         pturn = pturn % numPlayers;
         
+        
+        
         if (cardsLeft == 0){
             resetDeck(deck, numCards, numPlayed);
             shuffle(deck, *numCards);
