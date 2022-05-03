@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "other.h"
 
 void generateDeck(card deck[])
@@ -162,6 +163,105 @@ bool readDeck(card deck[], char fileName[])
     return true;
 }
 
+void printRow(int first, int last, card array[])
+{
+    for (int i = first; i <= last; i++)
+    {
+        printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
+    }
+    printf("\n");
+    
+    //2
+    for (int i = first; i <= last; i++)
+    {
+        switch (array[i].value) {
+            case 13:
+                printf("⠯ W ⠽⠿⠿⠿⠿\t");
+                break;
+                
+            case 14:
+                printf("⠯+4 ⠽⠿⠿⠿⠿\t");
+                break;
+                
+            default:
+                printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
+                break;
+        }
+    }
+    printf("\n");
+    
+    //3
+    for (int i = first; i <= last; i++)
+    {
+        printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
+    }
+    printf("\n");
+
+    //4
+    for (int i = first; i <= last; i++)
+    {
+        switch (array[i].value) {
+            case 10:
+                printf("⠿⠇SKIP ⠸⠿\t");
+                break;
+                
+            case 11:
+                printf("⠿⠇ REV ⠸⠿\t");
+                break;
+                
+            case 12:
+                printf("⠿⠇ +2  ⠸⠿\t");
+                break;
+                
+            case 13:
+                printf("⠿⠇WILD ⠸⠿\t");
+                break;
+                
+            case 14:
+                printf("⠿⠇ +4  ⠸⠿\t");
+                break;
+                
+            default:
+                printf("⠿⠇ %2d  ⠸⠿\t", array[i].value);
+                break;
+        }
+    }
+    printf("\n");
+    
+    //5
+    for (int i = first; i <= last; i++)
+    {
+        printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
+    }
+    printf("\n");
+    
+    //6
+    for (int i = first; i <= last; i++)
+    {
+        switch (array[i].value) {
+            case 13:
+                printf("⠿⠿⠿⠿⠯ W ⠽\t");
+                break;
+                
+            case 14:
+                printf("⠿⠿⠿⠿⠯ +4⠽\t");
+                break;
+                
+            default:
+                printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
+                break;
+        }
+    }
+    printf("\n");
+    
+    //7
+    for (int i = first; i <= last; i++)
+    {
+        printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
+    }
+    printf("\n");
+}
+
 //function to print a players hand
 //input: the initial "head" card in the respective player's linked list
 void printHand(card* *head, int playerNum)
@@ -218,102 +318,20 @@ void printHand(card* *head, int playerNum)
                 break;
         }
         printf("'s hand:\n");
-        //1
-        for (int i = 0; i < count; i++)
-        {
-            printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
-        }
-        printf("\n");
         
-        //2
-        for (int i = 0; i < count; i++)
+        int numRows = (int)ceil(count/5.0);
+        
+        for (int r = 0; r < numRows; r++)
         {
-            switch (array[i].value) {
-                case 13:
-                    printf("⠯ W ⠽⠿⠿⠿⠿\t");
-                    break;
-                    
-                case 14:
-                    printf("⠯+4 ⠽⠿⠿⠿⠿\t");
-                    break;
-                    
-                default:
-                    printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
-                    break;
+            if (r == numRows - 1)
+            {
+                printRow(r*5, count-1, array);
             }
-        }
-        printf("\n");
-        
-        //3
-        for (int i = 0; i < count; i++)
-        {
-            printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
-        }
-        printf("\n");
-
-        //4
-        for (int i = 0; i < count; i++)
-        {
-            switch (array[i].value) {
-                case 10:
-                    printf("⠿⠇SKIP ⠸⠿\t");
-                    break;
-                    
-                case 11:
-                    printf("⠿⠇ REV ⠸⠿\t");
-                    break;
-                    
-                case 12:
-                    printf("⠿⠇ +2  ⠸⠿\t");
-                    break;
-                    
-                case 13:
-                    printf("⠿⠇WILD ⠸⠿\t");
-                    break;
-                    
-                case 14:
-                    printf("⠿⠇ +4  ⠸⠿\t");
-                    break;
-                    
-                default:
-                    printf("⠿⠇ %2d  ⠸⠿\t", array[i].value);
-                    break;
+            else{
+                printRow(r*5, (r*5)+4, array);
             }
+            
         }
-        printf("\n");
-        
-        //5
-        for (int i = 0; i < count; i++)
-        {
-            printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
-        }
-        printf("\n");
-        
-        //6
-        for (int i = 0; i < count; i++)
-        {
-            switch (array[i].value) {
-                case 13:
-                    printf("⠿⠿⠿⠿⠯ W ⠽\t");
-                    break;
-                    
-                case 14:
-                    printf("⠿⠿⠿⠿⠯ +4⠽\t");
-                    break;
-                    
-                default:
-                    printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
-                    break;
-            }
-        }
-        printf("\n");
-        
-        //7
-        for (int i = 0; i < count; i++)
-        {
-            printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
-        }
-        printf("\n");
     }
 }
 

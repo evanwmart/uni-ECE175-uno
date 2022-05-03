@@ -48,6 +48,8 @@ bool winSeq(int pturn);
 
 void resetDeck(card deck[],int *numCards,int *numPlayed);
 
+void printRow(int first, int last, card array[]);
+
 #endif /* other_h */
 
 /*
