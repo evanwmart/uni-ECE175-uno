@@ -129,7 +129,7 @@ void startSeq(int *loadType, int*players, int*gameVar, int *AIP)
     
     
     int AI = promptAI(*players);
-    *AIP = AI;
+    *AIP = AI-1;
     
     while(*loadType != 1 && *loadType != 2)
     {

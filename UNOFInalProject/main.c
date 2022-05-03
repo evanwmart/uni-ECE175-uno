@@ -14,7 +14,7 @@
 
 int main (void)
 {
-    int numAI = 0;
+    int numAI = -1;
     int loadType = 0, numPlayers = 0, gameVar = 0, cardsPlayed = 0, cardsLeft = 108;
     int* loadPt = &loadType;
     int* playersPt = &numPlayers;
@@ -88,7 +88,7 @@ int main (void)
         //Determine which player's turn it is
         pturn = pturn % numPlayers;
         
-        if((pturn == numAI) && AIplayer != 0){
+        if((pturn == numAI) && *AIplayer != -1){
             int checkPlayed = *numPlayed;
             AITurn(&playersH[pturn], &playersT[pturn], deck, &pdirection, deck[107], numCards, numPlayed);
             int nextP;
