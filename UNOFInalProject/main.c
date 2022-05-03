@@ -92,8 +92,9 @@ int main (void)
             int checkPlayed = *numPlayed;
             AITurn(&playersH[pturn], &playersT[pturn], deck, &pdirection, deck[107], numCards, numPlayed);
             int nextP;
+            
             //determine turn dynamics and direction
-            if (checkPlayed == *numPlayed){
+            if (checkPlayed != *numPlayed){
                 switch (deck[107].value) {
                     case 10:    //skip card
                         nextP = (pturn + pdirection) % numPlayers;
@@ -116,7 +117,7 @@ int main (void)
                         
                     case 13:    //wild card
                         //Prompt to change color
-                        colorChange(&deck[107]);
+                        strcpy(deck[107].color, "♠");
                         pturn += pdirection;        //change turn
                         break;
                         
@@ -128,7 +129,7 @@ int main (void)
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         //prompt to change color "colorChange()"
-                        colorChange(&deck[107]);
+                        strcpy(deck[107].color, "♥");
                         pturn += pdirection;    //change turn
                         break;
                         
