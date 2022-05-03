@@ -14,6 +14,9 @@
 
 int main (void)
 {
+    bool y = true;
+    while(y){
+        
     int numAI = -1;
     int loadType = 0, numPlayers = 0, gameVar = 0, cardsPlayed = 0, cardsLeft = 108;
     int* loadPt = &loadType;
@@ -236,8 +239,8 @@ int main (void)
                 //count player's hand, if zero then win sequence, if one then say "UNO"
                 if (cardCount(&playersH[pturn]) == 0)
                 {
-                    win = winSeq(pturn);
-                    canPlay = false;
+                    win = true;
+                    break;
                 }
                 else if (cardCount(&playersH[pturn]) == 1)
                 {
@@ -305,6 +308,16 @@ int main (void)
                 }
         }//end of AI else
         }//end of !canPlay loop
-    }//end of game loop
+    }//end of !win loop
+    
+        y = (!winSeq(pturn));
+        if (y){
+            win = true;
+        }
+        else {
+            win = false;
+        }
+    
+    }//end of while y
     return 0;
 }//end of main
