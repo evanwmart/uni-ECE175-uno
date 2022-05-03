@@ -52,6 +52,14 @@ void printRow(int first, int last, card array[]);
 
 int promptAI(int numPlayers);
 
+bool checkWild(card* *head, int *pos);
+
+bool checkColor(card* *head, int *pos, char color[]);
+
+bool checkValue(card* *head, int *pos, int value);
+
+bool checkFour(card* *head, int *pos);
+
 #endif /* other_h */
 
 /*
