@@ -14,7 +14,7 @@
 
 int main (void)
 {
-    int numAI=0;
+    int numAI = 0;
     int loadType = 0, numPlayers = 0, gameVar = 0, cardsPlayed = 0, cardsLeft = 108;
     int* loadPt = &loadType;
     int* playersPt = &numPlayers;
@@ -88,9 +88,61 @@ int main (void)
         //Determine which player's turn it is
         pturn = pturn % numPlayers;
         
-        if((pturn==AIP) && (AI?)){
-            AITurn(&playerH[pturn], &playerT[pturn], deck, &direction);
+        if((pturn == numAI) && AIplayer != 0){
+            int checkPlayed = *numPlayed;
+            AITurn(&playersH[pturn], &playersT[pturn], deck, &pdirection, deck[107], numCards, numPlayed);
+            int nextP;
+            //determine turn dynamics and direction
+            if (checkPlayed == *numPlayed){
+                switch (deck[107].value) {
+                    case 10:    //skip card
+                        nextP = (pturn + pdirection) % numPlayers;
+                        printf("Player %d was skipped!\n", nextP+1);
+                        pturn += (pdirection * 2);  //change turn
+                        break;
+                        
+                    case 11:    //reverse card
+                        pdirection = pdirection * -1;
+                        pturn += pdirection;        //change turn
+                        break;
+                    
+                    case 12:    //pickup 2 card
+                        //Pick up two for next player
+                        nextP = (pturn + pdirection) % numPlayers;
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        pturn += pdirection;        //change turn
+                        break;
+                        
+                    case 13:    //wild card
+                        //Prompt to change color
+                        colorChange(&deck[107]);
+                        pturn += pdirection;        //change turn
+                        break;
+                        
+                    case 14:    //pickup 4 card
+                        //pick up 4 for next player
+                        nextP = (pturn + pdirection) % numPlayers;
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
+                        //prompt to change color "colorChange()"
+                        colorChange(&deck[107]);
+                        pturn += pdirection;    //change turn
+                        break;
+                        
+                    default:
+                        pturn += pdirection;    //change turn
+                        break;
+                        
+                }
+            }
         }
+        
+        //Determine which player's turn it is
+        pturn = pturn % numPlayers;
+        
         
         if (cardsLeft == 0){
             resetDeck(deck, numCards, numPlayed);

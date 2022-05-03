@@ -52,6 +52,8 @@ void printRow(int first, int last, card array[]);
 
 int promptAI(int numPlayers);
 
+void AITurn(card* *head, card* *tail, card deck[], int *direction, card discard, int *cardsLeft, int *numPlayed);
+
 bool checkWild(card* *head, int *pos);
 
 bool checkColor(card* *head, int *pos, char color[]);
