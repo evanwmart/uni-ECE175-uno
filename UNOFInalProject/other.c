@@ -11,6 +11,8 @@
 #include <math.h>
 #include "other.h"
 
+//input: the static deck array
+//populate the deck array with cards (alternative to loading from file)
 void generateDeck(card deck[])
 {
     card *pt;
@@ -68,7 +70,7 @@ void generateDeck(card deck[])
 }
 
 //function to shuffle an array
-//input: the array and the index number of which empty slots start
+//input: the array and the number of undrawn cards left in the deck
 void shuffle(card deck[], int numCards)
 {
     card * pt;
@@ -85,8 +87,8 @@ void shuffle(card deck[], int numCards)
 }
 
 //function for the startup sequence
-//input: 3 int pointers
-void startSeq(int *loadType, int*players, int*gameVar, int *AIP)
+//input: 4 int pointers
+void startSeq(int *loadType, int*players, int*gameVar, int *AIP)        //AIP = AI Player #
 {
 
     printf("Let’s Play a Game of UNO\n");
@@ -169,6 +171,8 @@ bool readDeck(card deck[], char fileName[])
     return true;
 }
 
+//function to print a row of 5 cards in a player's hand
+//inputs: the index numbers for card #1 and #5 in the row, an array of a player's hand
 void printRow(int first, int last, card array[])
 {
     for (int i = first; i <= last; i++)
@@ -269,7 +273,7 @@ void printRow(int first, int last, card array[])
 }
 
 //function to print a players hand
-//input: the initial "head" card in the respective player's linked list
+//input: the player's head pointer and the player's number
 void printHand(card* *head, int playerNum)
 {
     card *instance = *head;
@@ -379,6 +383,8 @@ void printTopCard(card deck[])
     printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁ \n");
 }
 
+//count the amount of cards in a player's hand
+//input: the head pointer of a player's hand
 int cardCount(card* *head)
 {
     card *instance = *head;
@@ -401,7 +407,7 @@ int cardCount(card* *head)
 }
 
 //function to draw a card from the deck to a player's hand & then shift the unplayed cards down 1 in the deck array
-//input: the player's respective head card, the deck array, the amount of undrawn cards left in the deck
+//input: the player's respective head pointer, tail pointer, the deck array, the amount of undrawn cards left in the deck
 void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
 {
     //Copy the data
@@ -437,7 +443,9 @@ void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
     *cardsLeft -= 1;
 }
 
-void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft, int *numPlayed) // moves the card from the players hand to the discard pile
+// moves the card from the players hand to the discard pile and shifts the discarded cards down in the array
+//inputs: the player's head and tail pointers, the index of desired card to play, the deck array, the amount of undrawn cards left, the amount of cards in the discard pile
+void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft, int *numPlayed)
 {
     card *pt = *head;
     
@@ -484,7 +492,9 @@ void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft
     *numPlayed+= 1;
 }
 
-int promptPlayer(card* *head, card deck[], int playerNum){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
+//prompts the player which card they want to play in their hand and will return the index of chosen card by the player
+//inputs: the player's head and tail pointers, the deck array, the player's number
+int promptPlayer(card* *head, card deck[], int playerNum){
     
     printTopCard(deck);
     printHand(head, playerNum);
@@ -496,7 +506,9 @@ int promptPlayer(card* *head, card deck[], int playerNum){ //prompts the player 
     return count;
 }
 
-bool cardCheck(card cardPlayed, card base){ //checks if the users selected card is a valid card to play
+//check if a selected card is valid to play on the discard pile
+//inputs: desired card to play, the top of the discard pile
+bool cardCheck(card cardPlayed, card base){
     
     if((cardPlayed.value == base.value) || strcmp(cardPlayed.color, base.color) == 0){
         return true;
@@ -513,7 +525,9 @@ bool cardCheck(card cardPlayed, card base){ //checks if the users selected card 
     
 }
 
-card getCard(card* *head, int pos){ //returns the card that the player last played
+//returns a card in a given player's hand
+//inputs: the player's head node, the index position of the desired card
+card getCard(card* *head, int pos){
     card *temp = *head;
     for(int i = 1; i < pos; i++)
     {
@@ -522,6 +536,8 @@ card getCard(card* *head, int pos){ //returns the card that the player last play
     return *temp;
 }
 
+//function to prompt user to change color when a wild card iss played
+//input: the top card of the discard pile
 void colorChange(card *lastCard){
     int i = -1;
     
@@ -555,6 +571,8 @@ void colorChange(card *lastCard){
     }
 }
 
+//run win sequence and prompt user whether they wish to play another game
+//input: the winning player's number
 bool winSeq(int pturn){
     printf("Player");
     switch (pturn) {
@@ -614,6 +632,8 @@ bool winSeq(int pturn){
     }
 }
 
+//when the deck has ran out of cards the discard pile will be shifted to the front of the deck array and be shuffled
+//inputs: the deck array, number of cards left, number of in discard pile
 void resetDeck(card deck[],int *numCards,int *numPlayed){
     card *pt;
     for (int i = 0; i < (108 - *numPlayed); i++)
@@ -631,7 +651,9 @@ void resetDeck(card deck[],int *numCards,int *numPlayed){
     *numPlayed = 0;
 }
 
-int promptAI(int numPlayers){ //asks user if they want to play with an AI, then asks user what player they want the AI to play for
+//asks user if they want to play with an AI, then asks user what player they want the AI to play as
+//input: the amount of desired players
+int promptAI(int numPlayers){
 
     //if user doesn't want AI return -1
     //if user does want AI return the number that the user inputted for the AI (e.g. if user inputs player 4 to imply they want the AI to play as player 4, then the function will return 4
@@ -674,6 +696,8 @@ int promptAI(int numPlayers){ //asks user if they want to play with an AI, then 
     
 }
 
+//run the AI player's turn sequence and implement strategy
+//inputs: the AI's head and tail pointers, the deck array, the play direction, the top of the discard pile, the amount of cards left in the deck, the amount of cards in the discard pile
 void AITurn(card* *head, card* *tail, card deck[], int *direction, card discard, int *cardsLeft, int *numPlayed){
     
     int position = 0;
@@ -681,24 +705,24 @@ void AITurn(card* *head, card* *tail, card deck[], int *direction, card discard,
     //iterate through hand and check for wild
     card *temp = *head;
     
-    if (checkWild(&temp, pPt)){
+    if (checkWild(&temp, pPt)){     //prioritize changing color
         playCard(head, tail, *pPt, deck, cardsLeft, numPlayed);
         printf("AI Player has played WILD.\n");
     }
-    else if (checkColor(&temp, pPt, discard.color)){
+    else if (checkColor(&temp, pPt, discard.color)){    //next prioritize playing any card that fitss the suit
         playCard(head, tail, *pPt, deck, cardsLeft, numPlayed);
         printf("AI Player has played their turn.\n");
     }
-    else if (checkValue(&temp, pPt, discard.value)){
+    else if (checkValue(&temp, pPt, discard.value)){    //next prioritize playing any card that fitss the value
         playCard(head, tail, *pPt, deck, cardsLeft, numPlayed);
         printf("AI Player has played their turn.\n");
     }
-    else if(checkFour(&temp, pPt)){
+    else if(checkFour(&temp, pPt)){                     //next prioritize playing a draw four card
         playCard(head, tail, *pPt, deck, cardsLeft, numPlayed);
         printf("AI Player has played their turn.\n");
     }
     else{
-        drawCard(head, tail, deck, cardsLeft);
+        drawCard(head, tail, deck, cardsLeft);          //else the AI will draw a card
         printf("AI Player has drawn a card.\n");
     }
     
@@ -706,6 +730,7 @@ void AITurn(card* *head, card* *tail, card deck[], int *direction, card discard,
     
 }
 
+//function to check if hand has a wild card
 bool checkWild(card* *head, int *pos){
     card *temp = *head;
     int position = 1;
@@ -720,6 +745,7 @@ bool checkWild(card* *head, int *pos){
     return false;
 }
 
+//function to check if hand has a card matching the top discard's color
 bool checkColor(card* *head, int *pos, char color[]){
     card *temp = *head;
     int position = 1;
@@ -734,7 +760,7 @@ bool checkColor(card* *head, int *pos, char color[]){
     return false;
 }
 
-
+//function to check if hand has a card matching the top discard's value
 bool checkValue(card* *head, int *pos, int value){
     card *temp = *head;
     int position = 1;
@@ -749,6 +775,7 @@ bool checkValue(card* *head, int *pos, int value){
     return false;
 }
 
+//function to check if hand has a draw four
 bool checkFour(card* *head, int *pos){
     card *temp = *head;
     int position = 1;

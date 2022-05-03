@@ -15,7 +15,8 @@
 int main (void)
 {
     bool y = true;
-    while(y){
+    
+    while(y){   //start of full game loop
         
     int numAI = -1;
     int loadType = 0, numPlayers = 0, gameVar = 0, cardsPlayed = 0, cardsLeft = 108;
@@ -95,6 +96,7 @@ int main (void)
         if((pturn == numAI) && *AIplayer != -1){
             int checkPlayed = *numPlayed;
             int checkDrawn = cardCount(&playersH[pturn]);
+            //run AI's turn
             AITurn(&playersH[pturn], &playersT[pturn], deck, &pdirection, deck[107], numCards, numPlayed);
             int nextP;
             
@@ -122,7 +124,7 @@ int main (void)
                         
                     case 13:    //wild card
                         //Prompt to change color
-                        strcpy(deck[107].color, "♠");
+                        strcpy(deck[107].color, "♠");   //default change color choice
                         pturn += pdirection;        //change turn
                         break;
                         
@@ -134,7 +136,7 @@ int main (void)
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         drawCard(&playersH[nextP], &playersT[nextP], deck, numCards);
                         //prompt to change color "colorChange()"
-                        strcpy(deck[107].color, "♥");
+                        strcpy(deck[107].color, "♥");       //default change ccolor choice
                         pturn += pdirection;    //change turn
                         break;
                         
@@ -250,7 +252,7 @@ int main (void)
                 //If card was playable, check how the card affects the turn rotation
                 if (canPlay)
                 {
-                    int nextP;
+                    int nextP;//next player value
                     switch (deck[107].value) {
                         case 10:    //skip card
                             nextP = (pturn + pdirection) % numPlayers;
@@ -310,6 +312,7 @@ int main (void)
         }//end of !canPlay loop
     }//end of !win loop
     
+        //win sequence & determine which loops to continue
         y = (!winSeq(pturn));
         if (y){
             win = true;
