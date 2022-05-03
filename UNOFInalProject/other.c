@@ -651,7 +651,7 @@ int promptAI(int numPlayers){ //asks user if they want to play with an AI, then 
     }
     
     
-    while ((playerNumber<1 || playerNumber>numPlayers) && (userChoice='y'))
+    while ((playerNumber<1 || playerNumber>numPlayers) && (userChoice == 'y'))
     {
         printf("Which player do you want the AI to play as? (1-%d): ", numPlayers);
         scanf("%d", &playerNumber);
