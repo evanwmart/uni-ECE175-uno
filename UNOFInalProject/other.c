@@ -2,24 +2,79 @@
 //  other.c
 //  UNOFInalProject
 //
-//  Created by Evan Martin & Brian Bedrosian on 4/22/22.
-//
+//  Created by Evan Martin & Brian Bedrosian
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "other.h"
+
+void generateDeck(card deck[])
+{
+    card *pt;
+    int i = 0;
+    for (int s = 0; s < 4; s++)
+    {
+        for(int n = 0; n < 15; n++)
+        {
+            pt = &deck[i];
+            pt->value = n;
+            switch (s) {
+                case 0:
+                    strcpy(pt->color, "♠");
+                    break;
+                    
+                case 1:
+                    strcpy(pt->color, "♥");
+                    break;
+                    
+                case 2:
+                    strcpy(pt->color, "♣");
+                    break;
+                    
+                default:
+                    strcpy(pt->color, "♦");
+                    break;
+            }
+            i++;
+        }
+        for(int n = 1; n < 13; n++)
+        {
+            pt = &deck[i];
+            pt->value = n;
+            switch (s) {
+                case 0:
+                    strcpy(pt->color, "♠");
+                    break;
+                    
+                case 1:
+                    strcpy(pt->color, "♥");
+                    break;
+                    
+                case 2:
+                    strcpy(pt->color, "♣");
+                    break;
+                    
+                default:
+                    strcpy(pt->color, "♦");
+                    break;
+            }
+            i++;
+        }
+    }
+}
 
 //function to shuffle an array
 //input: the array and the index number of which empty slots start
-void shuffle(card deck[], int size)
+void shuffle(card deck[], int numCards)
 {
     card * pt;
-    for (int i = 0; i < size * 10; i++)
+    for (int i = 0; i < numCards * 10; i++)
     {
-        int index1 = rand() % size;
+        int index1 = rand() % numCards;
         card temp = deck[index1];
-        int index2 = rand() % size;
+        int index2 = rand() % numCards;
         pt = &deck[index1];
         *pt = deck[index2];
         pt = &deck[index2];
@@ -34,11 +89,11 @@ void startSeq(int *loadType, int*players, int*gameVar)
 
     printf("Let’s Play a Game of UNO\n");
     
-    while(!(*players < 11 && 0 < *players))
+    while(!(*players < 11 && 1 < *players))
     {
-    printf("We can accomodate 1-10 players.\nHow many players are participating? ");
+    printf("We can accomodate 2-10 players.\nHow many players are participating? ");
     scanf("%d", players);
-        if (*players < 1 || 10 < *players)
+        if (*players < 2 || 10 < *players)
         {
             printf("Sorry, please enter a valid number of players.\n");
         }
@@ -108,22 +163,117 @@ bool readDeck(card deck[], char fileName[])
     return true;
 }
 
+void printRow(int first, int last, card array[])
+{
+    for (int i = first; i <= last; i++)
+    {
+        printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
+    }
+    printf("\n");
+    
+    //2
+    for (int i = first; i <= last; i++)
+    {
+        switch (array[i].value) {
+            case 13:
+                printf("⠯ W ⠽⠿⠿⠿⠿\t");
+                break;
+                
+            case 14:
+                printf("⠯+4 ⠽⠿⠿⠿⠿\t");
+                break;
+                
+            default:
+                printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
+                break;
+        }
+    }
+    printf("\n");
+    
+    //3
+    for (int i = first; i <= last; i++)
+    {
+        printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
+    }
+    printf("\n");
+
+    //4
+    for (int i = first; i <= last; i++)
+    {
+        switch (array[i].value) {
+            case 10:
+                printf("⠿⠇SKIP ⠸⠿\t");
+                break;
+                
+            case 11:
+                printf("⠿⠇ REV ⠸⠿\t");
+                break;
+                
+            case 12:
+                printf("⠿⠇ +2  ⠸⠿\t");
+                break;
+                
+            case 13:
+                printf("⠿⠇WILD ⠸⠿\t");
+                break;
+                
+            case 14:
+                printf("⠿⠇ +4  ⠸⠿\t");
+                break;
+                
+            default:
+                printf("⠿⠇ %2d  ⠸⠿\t", array[i].value);
+                break;
+        }
+    }
+    printf("\n");
+    
+    //5
+    for (int i = first; i <= last; i++)
+    {
+        printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
+    }
+    printf("\n");
+    
+    //6
+    for (int i = first; i <= last; i++)
+    {
+        switch (array[i].value) {
+            case 13:
+                printf("⠿⠿⠿⠿⠯ W ⠽\t");
+                break;
+                
+            case 14:
+                printf("⠿⠿⠿⠿⠯ +4⠽\t");
+                break;
+                
+            default:
+                printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
+                break;
+        }
+    }
+    printf("\n");
+    
+    //7
+    for (int i = first; i <= last; i++)
+    {
+        printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
+    }
+    printf("\n");
+}
+
 //function to print a players hand
 //input: the initial "head" card in the respective player's linked list
 void printHand(card* *head, int playerNum)
 {
     card *instance = *head;
-    if (instance->t != NULL)
+    if (instance != NULL)
     {
-        int count = 0;
-        while (instance->t != NULL)
-        {
-            count++;
-            instance = instance->t;
-        }
-        card array[count+1];
+        int count = cardCount(head);
+        
+        card array[count];
         instance = *head;
-        for (int i = 0; i <= count; i++)
+        for (int i = 0; i < count; i++)
         {
             array[i] = *instance;
             if(instance->t != NULL)
@@ -168,54 +318,20 @@ void printHand(card* *head, int playerNum)
                 break;
         }
         printf("'s hand:\n");
-        //1
-        for (int i = 0; i <= count; i++)
-        {
-            printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄\t");
-        }
-        printf("\n");
         
-        //2
-        for (int i = 0; i <= count; i++)
-        {
-            printf("⠯ %s ⠽⠿⠿⠿⠿\t", array[i].color);
-        }
-        printf("\n");
+        int numRows = (int)ceil(count/5.0);
         
-        //3
-        for (int i = 0; i <= count; i++)
+        for (int r = 0; r < numRows; r++)
         {
-            printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇\t");
+            if (r == numRows - 1)
+            {
+                printRow(r*5, count-1, array);
+            }
+            else{
+                printRow(r*5, (r*5)+4, array);
+            }
+            
         }
-        printf("\n");
-
-        //4
-        for (int i = 0; i <= count; i++)
-        {
-            printf("⠿⠇ %2d  ⠸⠿\t", array[i].value);
-        }
-        printf("\n");
-        
-        //5
-        for (int i = 0; i <= count; i++)
-        {
-            printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇\t");
-        }
-        printf("\n");
-        
-        //6
-        for (int i = 0; i <= count; i++)
-        {
-            printf("⠿⠿⠿⠿⠯ %s ⠽\t", array[i].color);
-        }
-        printf("\n");
-        
-        //7
-        for (int i = 0; i <= count; i++)
-        {
-            printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁\t");
-        }
-        printf("\n");
     }
 }
 
@@ -223,13 +339,35 @@ void printHand(card* *head, int playerNum)
 //input: the deck array
 void printTopCard(card deck[])
 {
-    //Switch statement for value
-    
     printf("Discard pile:\n");
     printf("⠴⠖⠒⠲⠶⠶⠶⠶⠄ \n");
     printf("⠯ %s ⠽⠿⠿⠿⠿\n", deck[107].color);
     printf("⠿⠷⠖⠚⠛⠛⠻⠿⠇ \n");
-    printf("⠿⠇ %2d  ⠸⠿\n", deck[107].value);
+    switch (deck[107].value) {
+        case 10:
+            printf("⠿⠇SKIP ⠸⠿\n");
+            break;
+            
+        case 11:
+            printf("⠿⠇ REV ⠸⠿\n");
+            break;
+            
+        case 12:
+            printf("⠿⠇ +2  ⠸⠿\n");
+            break;
+            
+        case 13:
+            printf("⠿⠇WILD ⠸⠿\n");
+            break;
+            
+        case 14:
+            printf("⠿⠇ +4  ⠸⠿\n");
+            break;
+            
+        default:
+            printf("⠿⠇ %2d  ⠸⠿\n", deck[107].value);
+            break;
+    }
     printf("⠿⠿⠷⠶⠶⠖⠚⠻⠇ \n");
     printf("⠿⠿⠿⠿⠯ %s ⠽\n", deck[107].color);
     printf("⠙⠛⠛⠛⠛⠓⠒⠚⠁ \n");
@@ -248,8 +386,8 @@ int cardCount(card* *head)
         count = 1;
         while(instance->t != NULL)
         {
-            instance = instance->t;
             count++;
+            instance = instance->t;
         }
     }
     
@@ -293,7 +431,7 @@ void drawCard(card* *head, card* *tail, card deck[], int *cardsLeft)
     *cardsLeft -= 1;
 }
 
-void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft) // moves the card from the players hand to the discard pile
+void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft, int *numPlayed) // moves the card from the players hand to the discard pile
 {
     card *pt = *head;
     
@@ -337,6 +475,7 @@ void playCard(card* *head, card* *tail, int cardPos, card deck[], int* cardsLeft
     disc->t = NULL;
     disc->h = NULL;
     
+    *numPlayed+= 1;
 }
 
 int promptPlayer(card* *head, card deck[], int playerNum){ //prompts the player which card they want to play in their hand and will return the integer of chosen card by the player
@@ -356,7 +495,13 @@ bool cardCheck(card cardPlayed, card base){ //checks if the users selected card 
     if((cardPlayed.value == base.value) || strcmp(cardPlayed.color, base.color) == 0){
         return true;
     }
-    else{
+    else if (cardPlayed.value == 13){
+        return true;
+    }
+    else if (cardPlayed.value == 14){
+        return true;        // !! Challenge/rules on +4
+    }
+    else {
         return false;
     }
     
@@ -402,4 +547,80 @@ void colorChange(card *lastCard){
             strcpy(lastCard->color, "♦");
             break;
     }
+}
+
+bool winSeq(int pturn){
+    printf("Player");
+    switch (pturn) {
+        case 0:
+            printf(" one");
+            break;
+        case 1:
+            printf(" two");
+            break;
+        case 2:
+            printf(" three");
+            break;
+        case 3:
+            printf(" four");
+            break;
+        case 4:
+            printf(" five");
+            break;
+        case 5:
+            printf(" six");
+            break;
+        case 6:
+            printf(" seven");
+            break;
+        case 7:
+            printf(" eight");
+            break;
+        case 8:
+            printf(" nine");
+            break;
+        case 9:
+            printf(" ten");
+            break;
+        default:
+            printf("");
+            break;
+    }
+    printf(" wins!\n");
+    
+    char resp = 'a';
+    while (resp != 'y' && resp != 'n')
+    {
+        printf("Would you like to play again? (y/n): ");
+        scanf("%*c%c", &resp);
+        
+        if (resp != 'y' && resp != 'n')
+        {
+            printf("Please enter a lowercase 'y' or 'n' to respond.\n");
+        }
+    }
+    
+    if (resp == 'y'){
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+void resetDeck(card deck[],int *numCards,int *numPlayed){
+    card *pt;
+    for (int i = 0; i < (108 - *numPlayed); i++)
+    {
+        pt = &deck[i];
+        *pt = deck[(108-*numPlayed)+i];
+    }
+    for (int i = (108 - *numPlayed); i < 108; i++)
+    {
+        pt = &deck[i];
+        strcpy(pt->color, "X");
+        pt->value = -1;
+    }
+    *numCards = *numPlayed;
+    *numPlayed = 0;
 }
