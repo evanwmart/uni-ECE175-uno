@@ -7,12 +7,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <math.h>
 #include "other.h"
 
 void generateDeck(card deck[])
 {
     card *pt;
+    
     int i = 0;
     for (int s = 0; s < 4; s++)
     {
@@ -670,4 +672,87 @@ int promptAI(int numPlayers){ //asks user if they want to play with an AI, then 
         return -1;
     }
     
+}
+
+void AITurn(card* *head, card* *tail, card deck[], int *direction, card discard, int *cardsLeft, int *numPlayed){
+    
+    int position = 0;
+    int *pPt = &position;
+    //iterate through hand and check for wild
+    card *temp = *head;
+    
+    if (checkWild(&temp, pPt)){
+        playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
+    }
+    else if (checkColor(&temp, pPt, discard.color)){
+        playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
+    }
+    else if (checkValue(&temp, pPt, discard.value)){
+        playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
+    }
+    else if(checkFour(&temp, pPt)){
+        playCard(&temp, tail, *pPt, deck, cardsLeft, numPlayed);
+    }
+    else{
+        drawCard(&temp, tail, deck, cardsLeft);
+    }
+    
+    //turn alteration
+}
+
+bool checkWild(card* *head, int *pos){
+    card *temp = *head;
+    int position = 1;
+    while (temp->t != NULL){
+        position++;
+        temp = temp->t;
+        if (temp->value == 13){
+            *pos = position;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool checkColor(card* *head, int *pos, char color[]){
+    card *temp = *head;
+    int position = 1;
+    while (temp->t != NULL){
+        position++;
+        temp = temp->t;
+        if (strcmp(temp->color, color)){
+            *pos = position;
+            return true;
+        }
+    }
+    return false;
+}
+
+
+bool checkValue(card* *head, int *pos, int value){
+    card *temp = *head;
+    int position = 1;
+    while (temp->t != NULL){
+        position++;
+        temp = temp->t;
+        if (temp->value == value){
+            *pos = position;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool checkFour(card* *head, int *pos){
+    card *temp = *head;
+    int position = 1;
+    while (temp->t != NULL){
+        position++;
+        temp = temp->t;
+        if (temp->value == 14){
+            *pos = position;
+            return true;
+        }
+    }
+    return false;
 }
