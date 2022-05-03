@@ -88,6 +88,10 @@ int main (void)
         //Determine which player's turn it is
         pturn = pturn % numPlayers;
         
+        if((pturn==AIP) && (AI?)){
+            AITurn(&playerH[pturn], &playerT[pturn], deck, &direction);
+        }
+        
         if (cardsLeft == 0){
             resetDeck(deck, numCards, numPlayed);
             shuffle(deck, *numCards);
