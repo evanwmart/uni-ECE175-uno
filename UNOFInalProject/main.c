@@ -14,16 +14,18 @@
 
 int main (void)
 {
+    int numAI=0;
     int loadType = 0, numPlayers = 0, gameVar = 0, cardsPlayed = 0, cardsLeft = 108;
     int* loadPt = &loadType;
     int* playersPt = &numPlayers;
     int* gameVarPt = &gameVar;
     int* numCards = &cardsLeft;
     int* numPlayed = &cardsPlayed;
+    int *AIplayer = &numAI;
     card deck[108];
     readDeck(deck, "deck.txt");
     
-    startSeq(loadPt, playersPt, gameVarPt);     //starting sequence to intialize game settings
+    startSeq(loadPt, playersPt, gameVarPt, AIplayer);     //starting sequence to intialize game settings
     
     if (loadType == 1)          //user has chosen to generate and shuffle a deck
     {

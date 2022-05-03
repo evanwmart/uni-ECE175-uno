@@ -84,7 +84,7 @@ void shuffle(card deck[], int numCards)
 
 //function for the startup sequence
 //input: 3 int pointers
-void startSeq(int *loadType, int*players, int*gameVar)
+void startSeq(int *loadType, int*players, int*gameVar, int *AIP)
 {
 
     printf("Let’s Play a Game of UNO\n");
@@ -124,6 +124,10 @@ void startSeq(int *loadType, int*players, int*gameVar)
             printf("Classic game mode was selected\n");
             break;
     }
+    
+    
+    int AI = promptAI(*players);
+    *AIP = AI;
     
     while(*loadType != 1 && *loadType != 2)
     {
@@ -623,4 +627,47 @@ void resetDeck(card deck[],int *numCards,int *numPlayed){
     }
     *numCards = *numPlayed;
     *numPlayed = 0;
+}
+
+int promptAI(int numPlayers){ //asks user if they want to play with an AI, then asks user what player they want the AI to play for
+
+    //if user doesn't want AI return -1
+    //if user does want AI return the number that the user inputted for the AI (e.g. if user inputs player 4 to imply they want the AI to play as player 4, then the function will return 4
+    
+    int playerNumber = 0; //integer that will be stored as the value the user inputs for which player they want the AI to play as
+    
+    char userChoice='b';
+    while (userChoice != 'y' && userChoice != 'n')
+    {
+        printf("Do you want to play with an AI? y/n: \n");
+        scanf("%*c%c", &userChoice);
+        
+        if (userChoice != 'y' && userChoice != 'n')
+        {
+            printf("Please enter a lowercase 'y' or 'n' to respond.\n");
+        }
+    }
+    
+    
+    while ((playerNumber<1 || playerNumber>numPlayers) && (userChoice='y'))
+    {
+        printf("Which player do you want the AI to play as? (1-%d): ", numPlayers);
+        scanf("%d", &playerNumber);
+        
+        if (playerNumber<1 || playerNumber>numPlayers)
+        {
+            printf("Please enter a valid player number\n");
+        }
+        
+    }
+    
+    if(userChoice=='y'){
+        
+        return playerNumber;
+    }
+    
+    else{
+        return -1;
+    }
+    
 }

@@ -24,7 +24,7 @@ void shuffle(card deck[], int size);
 
 bool readDeck(card deck[], char fileName[]);
 
-void startSeq(int *loadType, int*players, int*gameVar);
+void startSeq(int *loadType, int*players, int*gameVar, int *AIP);
 
 void printHand(card* *head, int playerNum);
 
@@ -49,6 +49,8 @@ bool winSeq(int pturn);
 void resetDeck(card deck[],int *numCards,int *numPlayed);
 
 void printRow(int first, int last, card array[]);
+
+int promptAI(int numPlayers);
 
 #endif /* other_h */
 
