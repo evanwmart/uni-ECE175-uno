@@ -4,6 +4,15 @@
 
 This project is the final assignment for an introductory programming class in C. It is a console-based game that simulates the popular card game UNO. The game supports multiple players, includes an AI option, and implements core UNO mechanics like drawing cards, playing special cards (Skip, Reverse, Draw Two, Wild, and Draw Four), and managing turn order.
 
+## Table of Contents
+
+- [Description](#description)
+- [Contents](#contents)
+- [Features](#features)
+- [Technology](#technology)
+- [Lessons](#lessons)
+- [Overview / Retrospective](#overview--retrospective)
+
 ## Contents
 
 - **main.c**  
